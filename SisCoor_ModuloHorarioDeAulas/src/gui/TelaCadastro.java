@@ -308,7 +308,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                 lbErro.setText("");
                 erroSenha = false;
             }
-
+            
             if (erroSenha == false) {
                 if (tfEmailCad.getText().indexOf('@') == -1 || tfEmailCad.getText().indexOf('.') == -1) {
                     lbErro.setText("Digite um E-mail válido!");
