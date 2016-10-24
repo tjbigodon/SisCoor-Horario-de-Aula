@@ -5,26 +5,28 @@
  */
 package utilitarios;
 
-import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- *
- * @author IFGoiano-Admin
+ * Classe responsável pelo gerenciamento do DB referente à tabela que diz respeito à área de atuação.
+ * @author Tarcísio
  */
 public class AreaAtuacaoDAO {
-    public void inserir(AreaAtuacao aa){
+    /**
+     * Método responsável pela inserção de uma nova área de atuação no DB.
+     * @param areaAtuacao objeto de AreaAtuacao.
+     */
+    public void inserir(AreaAtuacao areaAtuacao){
         Connection con = ConexaoBD.getConexao();
         try {
             PreparedStatement pstmt = con.prepareStatement(
                     "insert into areaatuacao " +
                      "(nome) VALUES (?)");
-            pstmt.setString(1, aa.getNomeArea());
+            pstmt.setString(1, areaAtuacao.getNomeArea());
             
             pstmt.execute();
             pstmt.close();
@@ -34,6 +36,10 @@ public class AreaAtuacaoDAO {
         }
     }
     
+    /**
+     * Método que retorna um ArrayList contendo todas as informações sobre todas as áreas de atuação no DB.
+     * @return todos os registros de áreas de atuação no DB.
+     */
     public ArrayList<AreaAtuacao> listar(){
         Connection con = ConexaoBD.getConexao();
         ArrayList<AreaAtuacao> res = new ArrayList<AreaAtuacao>();

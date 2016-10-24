@@ -16,8 +16,8 @@ import utilitarios.ProfessorDAO;
  */
 
 /**
- *
- * @author IFGoiano-Admin
+ * Classe responsável pela implementação da tela de login.
+ * @author Tarcísio
  */
 public class TelaLogin extends javax.swing.JFrame {
 

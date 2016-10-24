@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package utilitarios;
 
 import java.sql.Connection;
@@ -11,12 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
- * @author monica
+ * Classe responsável pela conexão do sistema com o DB.
+ * @author Tarcísio
  */
 public class ConexaoBD {
     private static Connection conexao;
     
+    /**
+     * Método responsável por conectar o sistema ao DB.
+     * @return objeto da classe Connection se for bem sucedido, ou null, caso seja malsucedido.
+     */
     private static Connection conectar(){
         try {
             return DriverManager.getConnection("jdbc:mysql://localhost:3307/siscoor?zeroDateTimeBehavior=convertToNull",
@@ -27,6 +25,11 @@ public class ConexaoBD {
             return null;
         }
     }
+    
+    /**
+     * Método responsável pela verificação da existência da conexão, e caso não esteja conectado, tenta fazer essa conexão.
+     * @return objeto da classe Connection.
+     */
     public static Connection getConexao(){
         try {
             if (conexao==null || conexao.isClosed()){

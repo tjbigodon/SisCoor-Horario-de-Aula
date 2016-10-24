@@ -14,8 +14,8 @@ import utilitarios.Professor;
 import utilitarios.ProfessorDAO;
 
 /**
- *
- * @author Tarcisio
+ * Classe responsável pela implementação da tela de cadastro.
+ * @author Tarcísio
  */
 public class TelaCadastro extends javax.swing.JFrame {
 
@@ -36,7 +36,6 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -59,12 +58,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         lbCadastroArea = new javax.swing.JLabel();
 
         jLabel7.setText("Senha:");
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,11 +91,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         tfAreaAtuacao.setEditable(false);
-        tfAreaAtuacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfAreaAtuacaoActionPerformed(evt);
-            }
-        });
 
         btVoltar.setMnemonic('V');
         btVoltar.setText("Voltar");
@@ -229,15 +217,11 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void tfAreaAtuacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAreaAtuacaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfAreaAtuacaoActionPerformed
-
+    
+    /**
+     * Método responsável por adicionar um item no Combo Box de áreas de atuação.
+     * @param nomeItem nome do item.
+     */
     public void addItem(String nomeItem) {
         comboAreaAtuacao.addItem(nomeItem);
     }
@@ -403,9 +387,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCad;
@@ -421,7 +402,6 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lbCadastroArea;
     private javax.swing.JLabel lbErro;
     private javax.swing.JPasswordField pfSenhaCad;

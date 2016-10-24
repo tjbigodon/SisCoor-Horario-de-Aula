@@ -10,8 +10,8 @@ import gui.TelaLogin;
 import javax.swing.JFrame;
 
 /**
- *
- * @author IFGoiano-Admin
+ * Classe responsável pela inicialização do programa, mais necessariamente, da abertura da tela de Login.
+ * @author Tarcísio
  */
 public class Principal {
     public static void main(String[] args) {

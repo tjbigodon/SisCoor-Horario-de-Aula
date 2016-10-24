@@ -5,19 +5,21 @@
  */
 package utilitarios;
 
-import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- *
- * @author livre
+ * Classe responsável pelo gerenciamento do DB referente à tabela que diz respeito ao professor.
+ * @author Tarcísio
  */
 public class ProfessorDAO {
+    /**
+     * Método responsável pela inserção no DB de um novo professor.
+     * @param prof objeto da classe Professor.
+     */
     public void inserir(Professor prof){
         Connection con = ConexaoBD.getConexao();
         try {
@@ -37,6 +39,10 @@ public class ProfessorDAO {
         }
     }
     
+    /**
+     * Método que retorna um ArrayList contendo todas as informações sobre todos os professores no DB.
+     * @return todos os registros de professores no DB.
+     */
     public ArrayList<Professor> listar(){
         Connection con = ConexaoBD.getConexao();
         ArrayList<Professor> res = new ArrayList<Professor>();
