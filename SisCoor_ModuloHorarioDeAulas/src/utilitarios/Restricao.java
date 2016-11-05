@@ -65,6 +65,14 @@ public class Restricao
     }
 
     /**
+     * Metodo que modifica o codigo do professor 
+     * @param codProf codigo do professor
+     */
+    public void setCodProf(int codProf) {
+        this.codProf = codProf;
+    }
+    
+    /**
      * Metodo que modifica o turno da restrição
      * @param turno turno da restrição indicada pelo professor
      */

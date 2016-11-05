@@ -40,6 +40,43 @@ public class ProfessorDAO {
     }
     
     /**
+     * Metodo que marca o professor logado como ativo
+     */
+    public void ativar_Professor(){
+        Connection con = ConexaoBD.getConexao();
+        try {
+            PreparedStatement pstmt = con.prepareStatement(
+                    "insert into professor " +
+                     "(status) VALUES (?)");
+            pstmt.setString(1, "ATIVO");
+            pstmt.execute();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Metodo que desmarca o professor deslogado
+     */
+    public void desativar_Professor(){
+        Connection con = ConexaoBD.getConexao();
+        try {
+            PreparedStatement pstmt = con.prepareStatement(
+                    "UPDATE professor " +
+                     "SET status=?" +
+                      "WHERE status=`ATIVO`");
+            pstmt.setString(1, "NULL");
+            pstmt.execute();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
      * Método que retorna um ArrayList contendo todas as informações sobre todos os professores no DB.
      * @return todos os registros de professores no DB.
      */

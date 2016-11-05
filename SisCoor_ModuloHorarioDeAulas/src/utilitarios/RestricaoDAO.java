@@ -104,7 +104,6 @@ public class RestricaoDAO {
              
          } catch (Exception e) {
              System.out.println("Não foi possível consultar tabela...");
-        
          }   
     }
     

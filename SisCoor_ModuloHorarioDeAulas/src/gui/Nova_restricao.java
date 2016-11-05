@@ -5,6 +5,10 @@
  */
 package gui;
 
+import utilitarios.ProfessorDAO;
+import utilitarios.Restricao;
+import utilitarios.RestricaoDAO;
+
 /**
  *
  * @author Diego
@@ -32,7 +36,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         rbSegunda = new javax.swing.JRadioButton();
-        rbTerça = new javax.swing.JRadioButton();
+        rbTerca = new javax.swing.JRadioButton();
         rbQuarta = new javax.swing.JRadioButton();
         rbQuinta = new javax.swing.JRadioButton();
         rbSexta = new javax.swing.JRadioButton();
@@ -57,8 +61,8 @@ public class Nova_restricao extends javax.swing.JFrame {
         buttonGroup1.add(rbSegunda);
         rbSegunda.setText("Segunda-feira");
 
-        buttonGroup1.add(rbTerça);
-        rbTerça.setText("Terça-feira");
+        buttonGroup1.add(rbTerca);
+        rbTerca.setText("Terça-feira");
 
         buttonGroup1.add(rbQuarta);
         rbQuarta.setText("Quarta-feira");
@@ -77,7 +81,7 @@ public class Nova_restricao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(rbSegunda)
                 .addGap(18, 18, 18)
-                .addComponent(rbTerça)
+                .addComponent(rbTerca)
                 .addGap(18, 18, 18)
                 .addComponent(rbQuarta)
                 .addGap(18, 18, 18)
@@ -92,7 +96,7 @@ public class Nova_restricao extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbSegunda)
-                    .addComponent(rbTerça)
+                    .addComponent(rbTerca)
                     .addComponent(rbQuarta)
                     .addComponent(rbQuinta)
                     .addComponent(rbSexta))
@@ -179,7 +183,52 @@ public class Nova_restricao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        Restricao restricao = new Restricao();
+        RestricaoDAO restricaDAO = new RestricaoDAO();
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        
+        if(rbSegunda.isSelected())
+        {
+            restricao.setDia("Segunda-feira");
+        }
+        
+        if(rbTerca.isSelected())
+        {
+            restricao.setDia("Terça-feira");
+        }
+        
+        if(rbQuarta.isSelected())
+        {
+            restricao.setDia("Quarta-feira");
+        }
+        
+        if(rbQuinta.isSelected())
+        {
+            restricao.setDia("Quinta-feira");
+        }
+        
+        if(rbSexta.isSelected())
+        {
+            restricao.setDia("Sexta-feira");
+        }
+        
+        if(rbMatutino.isSelected())
+        {
+            restricao.setTurno("Matutino");
+        }
+        
+        if(rbVespertino.isSelected())
+        {
+            restricao.setTurno("Vespertino");
+        }
+        
+        if(rbNoturno.isSelected())
+        {
+            restricao.setTurno("Noturno");
+        }
+        
+        restricao.setCodProf(professorDAO.);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -230,7 +279,7 @@ public class Nova_restricao extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbQuinta;
     private javax.swing.JRadioButton rbSegunda;
     private javax.swing.JRadioButton rbSexta;
-    private javax.swing.JRadioButton rbTerça;
+    private javax.swing.JRadioButton rbTerca;
     private javax.swing.JRadioButton rbVespertino;
     // End of variables declaration//GEN-END:variables
 }

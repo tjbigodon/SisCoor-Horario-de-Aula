@@ -103,7 +103,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="rbSegunda" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="rbTerça" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbTerca" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="rbQuarta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -120,7 +120,7 @@
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="rbSegunda" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbTerça" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbTerca" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rbQuarta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rbQuinta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rbSexta" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -139,7 +139,7 @@
             <Property name="text" type="java.lang.String" value="Segunda-feira"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rbTer&#xe7;a">
+        <Component class="javax.swing.JRadioButton" name="rbTerca">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>

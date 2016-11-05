@@ -215,6 +215,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 if(tfUsuario.getText().equals(profs.get(i).getUsername())&&Criptografia.criptografar(String.valueOf(pfSenha.getPassword())).equals(profs.get(i).getSenha())){
                     JOptionPane.showMessageDialog(this, "Bem vindo!", "Boas vindas", HEIGHT);
                     encontrou = true;
+                    profBD.ativar_Professor();
                 }
 
                 if((i+1)==profs.size()&&encontrou==false){
