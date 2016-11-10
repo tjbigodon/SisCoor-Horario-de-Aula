@@ -33,7 +33,7 @@ public class Nova_restricao extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
+        jbVoltar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         rbSegunda = new javax.swing.JRadioButton();
         rbTerca = new javax.swing.JRadioButton();
@@ -44,15 +44,15 @@ public class Nova_restricao extends javax.swing.JFrame {
         rbMatutino = new javax.swing.JRadioButton();
         rbVespertino = new javax.swing.JRadioButton();
         rbNoturno = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        jbSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nova Restrição");
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbVoltar.setText("Voltar");
+        jbVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbVoltarActionPerformed(evt);
             }
         });
 
@@ -138,7 +138,12 @@ public class Nova_restricao extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Salvar Restrição");
+        jbSalvar.setText("Salvar Restrição");
+        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,10 +160,10 @@ public class Nova_restricao extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(jbSalvar)
                                 .addGap(72, 72, 72))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(jbVoltar)
                                 .addGap(101, 101, 101))))))
         );
         layout.setVerticalGroup(
@@ -173,19 +178,22 @@ public class Nova_restricao extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(jbVoltar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(jbSalvar)
                         .addGap(36, 36, 36))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed
+       
+    }//GEN-LAST:event_jbVoltarActionPerformed
+
+    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
         Restricao restricao = new Restricao();
-        RestricaoDAO restricaDAO = new RestricaoDAO();
+        RestricaoDAO restricaoDAO = new RestricaoDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
         
         if(rbSegunda.isSelected())
@@ -228,8 +236,10 @@ public class Nova_restricao extends javax.swing.JFrame {
             restricao.setTurno("Noturno");
         }
         
-        restricao.setCodProf(professorDAO.);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        restricao.setCodProf(professorDAO.buscar_Ativo());
+        
+        restricaoDAO.inserir(restricao);
+    }//GEN-LAST:event_jbSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,10 +279,10 @@ public class Nova_restricao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jbSalvar;
+    private javax.swing.JButton jbVoltar;
     private javax.swing.JRadioButton rbMatutino;
     private javax.swing.JRadioButton rbNoturno;
     private javax.swing.JRadioButton rbQuarta;

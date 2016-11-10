@@ -201,21 +201,23 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
         boolean encontrou = false;
         
+        ProfessorDAO prof = new ProfessorDAO();
+        prof.desativar_Professor();
+        
         if(tfUsuario.getText().isEmpty()||String.valueOf(pfSenha.getPassword()).isEmpty()){
             lbErroLogin.setText("Insira usuário e senha!");
             pfSenha.setText("");
         }else{
             ArrayList<Professor> profs = new ArrayList<Professor>();
             ProfessorDAO profBD = new ProfessorDAO();
-
+            
             profs = profBD.listar();
-
 
             for(int i = 0; i<profs.size();i++){
                 if(tfUsuario.getText().equals(profs.get(i).getUsername())&&Criptografia.criptografar(String.valueOf(pfSenha.getPassword())).equals(profs.get(i).getSenha())){
                     JOptionPane.showMessageDialog(this, "Bem vindo!", "Boas vindas", HEIGHT);
                     encontrou = true;
-                    profBD.ativar_Professor();
+                    profBD.ativar_Professor(tfUsuario.getText());
                 }
 
                 if((i+1)==profs.size()&&encontrou==false){

@@ -42,13 +42,13 @@ public class ProfessorDAO {
     /**
      * Metodo que marca o professor logado como ativo
      */
-    public void ativar_Professor(){
+    public void ativar_Professor(String nome){
         Connection con = ConexaoBD.getConexao();
         try {
             PreparedStatement pstmt = con.prepareStatement(
-                    "insert into professor " +
-                     "(status) VALUES (?)");
+                    "UPDATE professor SET status=? WHERE userName=?");
             pstmt.setString(1, "ATIVO");
+            pstmt.setString(2, nome);
             pstmt.execute();
             pstmt.close();
             con.close();
@@ -64,10 +64,9 @@ public class ProfessorDAO {
         Connection con = ConexaoBD.getConexao();
         try {
             PreparedStatement pstmt = con.prepareStatement(
-                    "UPDATE professor " +
-                     "SET status=?" +
-                      "WHERE status=`ATIVO`");
-            pstmt.setString(1, "NULL");
+                    "UPDATE professor SET status=? WHERE status=?");
+            pstmt.setString(1, "");
+            pstmt.setString(2, "ATIVO");
             pstmt.execute();
             pstmt.close();
             con.close();
@@ -102,5 +101,31 @@ public class ProfessorDAO {
             System.out.println("Não foi possível consultar tabela..." + e);
         }
         return res;
+    }
+    
+    /**
+     * Metodo responsavel por retornar o codigo do professor que esta logado no momento.
+     * @return Retorna o codigo do professor ativo no momento
+     */
+    public int buscar_Ativo()
+    {
+        Connection con = ConexaoBD.getConexao();
+        int cod=0;
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT cod FROM professor WHERE status='ATIVO'");
+            Professor prof = new Professor();
+            while(rs.next())
+            {         
+                prof.setCod(rs.getInt("cod"));
+                cod=prof.getCod();
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Não foi possível consultar tabela..."+e);   
+        }
+        return cod;
     }
 }
