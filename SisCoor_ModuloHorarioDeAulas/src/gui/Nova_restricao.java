@@ -51,6 +51,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         setTitle("Nova Restrição");
 
         jbVoltar.setText("Voltar");
+        jbVoltar.setToolTipText("Volta para o menu");
         jbVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbVoltarActionPerformed(evt);
@@ -58,6 +59,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dia"));
+        jPanel1.setToolTipText("Dia da semana onde ocorre a restrição");
 
         buttonGroup1.add(rbSegunda);
         rbSegunda.setText("Segunda-feira");
@@ -105,6 +107,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Turno"));
+        jPanel2.setToolTipText("Turno do dia onde ocorre a restrição");
 
         buttonGroup2.add(rbMatutino);
         rbMatutino.setText("Matutino");
@@ -140,6 +143,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         );
 
         jbSalvar.setText("Salvar Restrição");
+        jbSalvar.setToolTipText("Salva a restrição");
         jbSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalvarActionPerformed(evt);
@@ -189,7 +193,7 @@ public class Nova_restricao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed
-       
+       this.dispose();
     }//GEN-LAST:event_jbVoltarActionPerformed
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
@@ -246,6 +250,8 @@ public class Nova_restricao extends javax.swing.JFrame {
         else
         {
             restricaoDAO.inserir(restricao);
+            JOptionPane.showMessageDialog(rootPane, "Restrição Salva com Sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 
