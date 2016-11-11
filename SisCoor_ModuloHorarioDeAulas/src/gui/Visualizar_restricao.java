@@ -5,6 +5,10 @@
  */
 package gui;
 
+import utilitarios.Modelo_jTable;
+import utilitarios.ProfessorDAO;
+import utilitarios.RestricaoDAO;
+
 /**
  *
  * @author Diego
@@ -16,6 +20,8 @@ public class Visualizar_restricao extends javax.swing.JFrame {
      */
     public Visualizar_restricao() {
         initComponents();
+        ProfessorDAO prof = new ProfessorDAO();
+        jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE codProf="+prof.buscar_Ativo()));
     }
 
     /**
@@ -26,7 +32,6 @@ public class Visualizar_restricao extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("siscoor?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
         restricaoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT r FROM Restricao r");
@@ -40,15 +45,17 @@ public class Visualizar_restricao extends javax.swing.JFrame {
         rbTurno = new javax.swing.JRadioButton();
         jtfPesquisar = new javax.swing.JTextField();
         btPesquisar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualizar Restrições");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar Restrição")));
+        jPanel1.setToolTipText("Seleciona o parametro e argumento de pesquisa");
 
         buttonGroup1.add(rbCodigo);
+        rbCodigo.setSelected(true);
         rbCodigo.setText("Codigo");
 
         buttonGroup1.add(rbDia);
@@ -56,8 +63,6 @@ public class Visualizar_restricao extends javax.swing.JFrame {
 
         buttonGroup1.add(rbTurno);
         rbTurno.setText("Turno");
-
-        jtfPesquisar.setEditable(false);
 
         btPesquisar.setText("Pesquisar");
         btPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +87,7 @@ public class Visualizar_restricao extends javax.swing.JFrame {
                         .addComponent(rbDia)
                         .addGap(60, 60, 60)
                         .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(btPesquisar)
                         .addGap(21, 21, 21))))
         );
@@ -101,20 +106,36 @@ public class Visualizar_restricao extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, restricaoList1, jTable2);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cod}"));
-        columnBinding.setColumnName("Cod");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dia}"));
-        columnBinding.setColumnName("Dia");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${turno}"));
-        columnBinding.setColumnName("Turno");
-        columnBinding.setColumnClass(String.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Codigo", "Dia", "Turno"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
-        jScrollPane2.setViewportView(jTable2);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +145,7 @@ public class Visualizar_restricao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -133,11 +154,9 @@ public class Visualizar_restricao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,17 +164,23 @@ public class Visualizar_restricao extends javax.swing.JFrame {
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
         if(rbCodigo.isSelected())
         {
-            
+            ProfessorDAO professor = new ProfessorDAO();
+            jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE cod="+Integer.parseInt(jtfPesquisar.getText())+" AND codProf="+professor.buscar_Ativo()));
+            jtfPesquisar.setText(null);
         }
         
         if(rbDia.isSelected())
         {
-            
+            ProfessorDAO professor = new ProfessorDAO();
+            jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE dia=\""+jtfPesquisar.getText()+"\" AND codProf="+professor.buscar_Ativo()));
+            jtfPesquisar.setText(null);
         }
         
         if(rbTurno.isSelected())
         {
-            
+            ProfessorDAO professor = new ProfessorDAO();
+            jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE turno=\""+jtfPesquisar.getText()+"\" AND codProf="+professor.buscar_Ativo()));
+            jtfPesquisar.setText(null);
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
 
@@ -190,6 +215,7 @@ public class Visualizar_restricao extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Visualizar_restricao().setVisible(true);
+                
             }
         });
     }
@@ -199,7 +225,7 @@ public class Visualizar_restricao extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jtfPesquisar;
     private javax.swing.JRadioButton rbCodigo;
@@ -209,6 +235,5 @@ public class Visualizar_restricao extends javax.swing.JFrame {
     private java.util.List<gui.Restricao> restricaoList1;
     private javax.persistence.Query restricaoQuery;
     private javax.persistence.Query restricaoQuery1;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -111,33 +111,43 @@ public class RestricaoDAO {
      * Metodo que busca uma determinada restrição do banco de dados 
      * @param cod codigo da restrição
      */
-    public void buscar(String dia_Turno, int codProf)
+    public void buscar(String dia_Turno, int codProf, int a)
     {
         Connection con = ConexaoBD.getConexao();
-         try {
-            if(dia_Turno.equals("Matutino") || dia_Turno.equals("Vespertino") || dia_Turno.equals("Noturno"))
+         try{
+            if(a==1)
             {
-                PreparedStatement pstmt = con.prepareStatement(
-                        "SELECT cod, dia, turno FROM  restricao WHERE turno=? AND codProf=?");
+                PreparedStatement pstmt = con.prepareStatement("SELECT cod, dia, turno FROM  restricao WHERE cod=? AND codProf=?");
 
-                pstmt.setString(1, dia_Turno);
-                pstmt.setInt(2, codProf);
-                pstmt.execute();
-                pstmt.close();
-                con.close();
+                    pstmt.setInt(1, Integer.parseInt(dia_Turno));
+                    pstmt.setInt(2, codProf);
+                    pstmt.execute();
+                    pstmt.close();
+                    con.close();
             }
-            else
+            if(a==0)
             {
-                PreparedStatement pstmt = con.prepareStatement(
-                        "SELECT cod, dia, turno FROM  restricao WHERE dia=? AND codProf=?");
+                if(dia_Turno.equals("Matutino") || dia_Turno.equals("Vespertino") || dia_Turno.equals("Noturno"))
+                {
+                    PreparedStatement pstmt = con.prepareStatement("SELECT cod, dia, turno FROM  restricao WHERE turno=? AND codProf=?");
 
-                pstmt.setString(1, dia_Turno);
-                pstmt.setInt(2, codProf);
-                pstmt.execute();
-                pstmt.close();
-                con.close();
+                    pstmt.setString(1, dia_Turno);
+                    pstmt.setInt(2, codProf);
+                    pstmt.execute();
+                    pstmt.close();
+                    con.close();
+                }
+                else
+                {
+                    PreparedStatement pstmt = con.prepareStatement("SELECT cod, dia, turno FROM  restricao WHERE dia=? AND codProf=?");
+
+                    pstmt.setString(1, dia_Turno);
+                    pstmt.setInt(2, codProf);
+                    pstmt.execute();
+                    pstmt.close();
+                    con.close();
+                }
             }
-             
          } catch (Exception e) {
              System.out.println("Não foi possível consultar tabela...");   
          }
