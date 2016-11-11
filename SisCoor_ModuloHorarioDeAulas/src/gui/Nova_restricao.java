@@ -47,7 +47,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         rbNoturno = new javax.swing.JRadioButton();
         jbSalvar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nova Restrição");
 
         jbVoltar.setText("Voltar");
