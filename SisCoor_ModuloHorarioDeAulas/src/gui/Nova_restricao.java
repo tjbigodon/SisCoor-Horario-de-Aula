@@ -5,6 +5,7 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
 import utilitarios.ProfessorDAO;
 import utilitarios.Restricao;
 import utilitarios.RestricaoDAO;
@@ -238,7 +239,14 @@ public class Nova_restricao extends javax.swing.JFrame {
         
         restricao.setCodProf(professorDAO.buscar_Ativo());
         
-        restricaoDAO.inserir(restricao);
+        if((restricaoDAO.buscar_Repeticao(restricao.getDia(), restricao.getTurno(), restricao.getCodProf()))==true)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Restrição ja Existente", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            restricaoDAO.inserir(restricao);
+        }
     }//GEN-LAST:event_jbSalvarActionPerformed
 
     /**

@@ -111,19 +111,73 @@ public class RestricaoDAO {
      * Metodo que busca uma determinada restrição do banco de dados 
      * @param cod codigo da restrição
      */
-    public void buscar(String cod)
+    public void buscar(String dia_Turno, int codProf)
     {
         Connection con = ConexaoBD.getConexao();
          try {
-            PreparedStatement pstmt = con.prepareStatement(
-                    "SELECT cod, dia, turno FROM  restricao WHERE cod=?");
-            pstmt.setString(1, cod);
-            pstmt.execute();
-            pstmt.close();
-            con.close();
+            if(dia_Turno.equals("Matutino") || dia_Turno.equals("Vespertino") || dia_Turno.equals("Noturno"))
+            {
+                PreparedStatement pstmt = con.prepareStatement(
+                        "SELECT cod, dia, turno FROM  restricao WHERE turno=? AND codProf=?");
+
+                pstmt.setString(1, dia_Turno);
+                pstmt.setInt(2, codProf);
+                pstmt.execute();
+                pstmt.close();
+                con.close();
+            }
+            else
+            {
+                PreparedStatement pstmt = con.prepareStatement(
+                        "SELECT cod, dia, turno FROM  restricao WHERE dia=? AND codProf=?");
+
+                pstmt.setString(1, dia_Turno);
+                pstmt.setInt(2, codProf);
+                pstmt.execute();
+                pstmt.close();
+                con.close();
+            }
              
          } catch (Exception e) {
              System.out.println("Não foi possível consultar tabela...");   
          }
+    }
+    
+    /**
+     * Metodo responsavel por verificar a existencia de uma restrição ja existente no banco de dados
+     * @param dia dia da restrição
+     * @param turno turno da restrição
+     * @param codProf codigo do professor referente a restrição
+     * @return retorna um valor booleano indicando true caso a restrição ja exista e caso contrario false.
+     */
+    public boolean buscar_Repeticao(String dia, String turno, int codProf)
+    {
+        Connection con = ConexaoBD.getConexao();
+        
+        boolean existe = false;
+          
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT dia, turno, codProf FROM restricao");
+            Restricao restricao = new Restricao();
+            while(rs.next())
+            {         
+                restricao.setDia(rs.getString("dia"));
+                restricao.setTurno(rs.getString("turno"));
+                restricao.setCodProf(rs.getInt("codProf"));
+                
+                if(dia.equals(restricao.getDia()) && turno.equals(restricao.getTurno()) && codProf==restricao.getCodProf())
+                {
+                    existe=true;
+                }
+            }
+            
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Não foi possível consultar tabela..."+e);   
+        }
+        return existe;
     }
 }
