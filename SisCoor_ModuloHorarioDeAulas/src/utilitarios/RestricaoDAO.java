@@ -92,9 +92,7 @@ public class RestricaoDAO {
          Connection con = ConexaoBD.getConexao();
          try {
             PreparedStatement pstmt = con.prepareStatement(
-                    "UPDATE restricao " +
-                     "SET dia=? , turno=?" +
-                      "WHERE cod=?");
+                    "UPDATE restricao SET dia=? , turno=? WHERE cod=?");
             pstmt.setString(1, dia);
             pstmt.setString(2, turno);
             pstmt.setInt(3, cod);

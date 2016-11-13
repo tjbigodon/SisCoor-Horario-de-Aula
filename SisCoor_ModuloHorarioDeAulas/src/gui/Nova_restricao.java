@@ -251,7 +251,6 @@ public class Nova_restricao extends javax.swing.JFrame {
         {
             restricaoDAO.inserir(restricao);
             JOptionPane.showMessageDialog(rootPane, "Restrição Salva com Sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 

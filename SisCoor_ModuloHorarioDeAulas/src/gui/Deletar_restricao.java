@@ -5,6 +5,10 @@
  */
 package gui;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import utilitarios.Modelo_jTable;
+import utilitarios.ProfessorDAO;
 import utilitarios.RestricaoDAO;
 
 /**
@@ -19,6 +23,8 @@ public class Deletar_restricao extends javax.swing.JFrame {
     public Deletar_restricao() {
         initComponents();
         
+        ProfessorDAO prof = new ProfessorDAO();
+        jTable1.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE codProf="+prof.buscar_Ativo()));
     }
 
     /**
@@ -29,9 +35,14 @@ public class Deletar_restricao extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("siscoor?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        restricaoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT r FROM Restricao r");
+        restricaoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : restricaoQuery.getResultList();
         jPanel1 = new javax.swing.JPanel();
-        jcRestricoes = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         btVoltar = new javax.swing.JButton();
         btDeletar = new javax.swing.JButton();
 
@@ -40,26 +51,47 @@ public class Deletar_restricao extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione Restrição"));
 
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, restricaoList, jTable1);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cod}"));
+        columnBinding.setColumnName("Cod");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dia}"));
+        columnBinding.setColumnName("Dia");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${turno}"));
+        columnBinding.setColumnName("Turno");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(jcRestricoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jcRestricoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
 
         btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
 
         btDeletar.setText("Deletar Restrição");
+        btDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeletarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,27 +101,55 @@ public class Deletar_restricao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(41, 41, 41)
                 .addComponent(btVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
                 .addComponent(btDeletar)
-                .addGap(40, 40, 40))
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVoltar)
-                    .addComponent(btDeletar))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(btDeletar)
+                    .addComponent(btVoltar))
+                .addGap(27, 27, 27))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeletarActionPerformed
+        RestricaoDAO restriDAO = new RestricaoDAO();
+        int linha, cod;
+        String confirm;
+        
+        linha=jTable1.getSelectedRow();
+        
+        cod=(int) jTable1.getValueAt(linha, 0);
+        
+        confirm=JOptionPane.showInputDialog("Digite \"Sim\" Para Confirmar ");
+        
+        if(confirm.equalsIgnoreCase("Sim"))
+        {
+            restriDAO.deletar(cod);
+            
+            JOptionPane.showMessageDialog(rootPane, "Restrição Excluida com Sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        
+            ProfessorDAO professor = new ProfessorDAO();
+            jTable1.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE codProf="+professor.buscar_Ativo()));
+        }
+    }//GEN-LAST:event_btDeletarActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,7 +189,12 @@ public class Deletar_restricao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDeletar;
     private javax.swing.JButton btVoltar;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> jcRestricoes;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private java.util.List<gui.Restricao> restricaoList;
+    private javax.persistence.Query restricaoQuery;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
