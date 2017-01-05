@@ -51,6 +51,8 @@ public class Deletar_restricao extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione Restrição"));
 
+        jTable1.setToolTipText("Restrições ");
+
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, restricaoList, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cod}"));
         columnBinding.setColumnName("Cod");
@@ -79,14 +81,18 @@ public class Deletar_restricao extends javax.swing.JFrame {
                 .addGap(78, 78, 78))
         );
 
+        btVoltar.setMnemonic('v');
         btVoltar.setText("Voltar");
+        btVoltar.setToolTipText("Volta ao menu principal");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVoltarActionPerformed(evt);
             }
         });
 
+        btDeletar.setMnemonic('d');
         btDeletar.setText("Deletar Restrição");
+        btDeletar.setToolTipText("Deleta a restrição selecionada");
         btDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDeletarActionPerformed(evt);
@@ -126,6 +132,7 @@ public class Deletar_restricao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeletarActionPerformed
+
         RestricaoDAO restriDAO = new RestricaoDAO();
         int linha, cod;
         String confirm;

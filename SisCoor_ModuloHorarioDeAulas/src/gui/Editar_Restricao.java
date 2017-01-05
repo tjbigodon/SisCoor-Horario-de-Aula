@@ -63,6 +63,8 @@ public class Editar_Restricao extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a Restrição"));
 
+        jTable1.setToolTipText("Restrições");
+
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, restricaoList, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cod}"));
         columnBinding.setColumnName("Cod");
@@ -94,6 +96,7 @@ public class Editar_Restricao extends javax.swing.JFrame {
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dia"));
+        jPanel2.setToolTipText("Dia da restrição");
 
         buttonGroup1.add(rbSegunda);
         rbSegunda.setText("Segunda-feira");
@@ -141,6 +144,7 @@ public class Editar_Restricao extends javax.swing.JFrame {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Turno"));
+        jPanel3.setToolTipText("Turno da restrição");
 
         rbMatutino.setText("Matutino");
 
@@ -172,14 +176,18 @@ public class Editar_Restricao extends javax.swing.JFrame {
                 .addGap(7, 7, 7))
         );
 
+        btVoltar.setMnemonic('v');
         btVoltar.setText("Voltar");
+        btVoltar.setToolTipText("Voltar ao menu principal");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVoltarActionPerformed(evt);
             }
         });
 
+        btSalvar.setMnemonic('s');
         btSalvar.setText("Salvar Restrição");
+        btSalvar.setToolTipText("Salva as alterações");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSalvarActionPerformed(evt);

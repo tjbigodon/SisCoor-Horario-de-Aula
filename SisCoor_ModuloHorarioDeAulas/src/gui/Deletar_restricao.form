@@ -114,6 +114,7 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Restri&#xe7;&#xf5;es "/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -160,7 +161,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btVoltar">
       <Properties>
+        <Property name="mnemonic" type="int" value="118"/>
         <Property name="text" type="java.lang.String" value="Voltar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Volta ao menu principal"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVoltarActionPerformed"/>
@@ -168,7 +171,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btDeletar">
       <Properties>
+        <Property name="mnemonic" type="int" value="100"/>
         <Property name="text" type="java.lang.String" value="Deletar Restri&#xe7;&#xe3;o"/>
+        <Property name="toolTipText" type="java.lang.String" value="Deleta a restri&#xe7;&#xe3;o selecionada"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDeletarActionPerformed"/>

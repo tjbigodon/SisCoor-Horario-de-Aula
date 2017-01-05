@@ -81,8 +81,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jbVoltar">
       <Properties>
+        <Property name="mnemonic" type="int" value="118"/>
         <Property name="text" type="java.lang.String" value="Voltar"/>
-        <Property name="toolTipText" type="java.lang.String" value="Volta para o menu"/>
+        <Property name="toolTipText" type="java.lang.String" value="Retorna ao menu principal"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbVoltarActionPerformed"/>
@@ -95,7 +96,7 @@
             <TitledBorder title="Dia"/>
           </Border>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Dia da semana onde ocorre a restri&#xe7;&#xe3;o"/>
+        <Property name="toolTipText" type="java.lang.String" value="Dia da restri&#xe7;&#xe3;o"/>
       </Properties>
 
       <Layout>
@@ -182,7 +183,7 @@
             <TitledBorder title="Turno"/>
           </Border>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Turno do dia onde ocorre a restri&#xe7;&#xe3;o"/>
+        <Property name="toolTipText" type="java.lang.String" value="Turno da restri&#xe7;&#xe3;o"/>
       </Properties>
 
       <Layout>
@@ -242,6 +243,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jbSalvar">
       <Properties>
+        <Property name="mnemonic" type="int" value="115"/>
         <Property name="text" type="java.lang.String" value="Salvar Restri&#xe7;&#xe3;o"/>
         <Property name="toolTipText" type="java.lang.String" value="Salva a restri&#xe7;&#xe3;o"/>
       </Properties>

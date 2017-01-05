@@ -136,6 +136,7 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Restri&#xe7;&#xf5;es"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -190,6 +191,7 @@
             <TitledBorder title="Dia"/>
           </Border>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Dia da restri&#xe7;&#xe3;o"/>
       </Properties>
 
       <Layout>
@@ -276,6 +278,7 @@
             <TitledBorder title="Turno"/>
           </Border>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Turno da restri&#xe7;&#xe3;o"/>
       </Properties>
 
       <Layout>
@@ -326,7 +329,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btVoltar">
       <Properties>
+        <Property name="mnemonic" type="int" value="118"/>
         <Property name="text" type="java.lang.String" value="Voltar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Voltar ao menu principal"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVoltarActionPerformed"/>
@@ -334,7 +339,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btSalvar">
       <Properties>
+        <Property name="mnemonic" type="int" value="115"/>
         <Property name="text" type="java.lang.String" value="Salvar Restri&#xe7;&#xe3;o"/>
+        <Property name="toolTipText" type="java.lang.String" value="Salva as altera&#xe7;&#xf5;es"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSalvarActionPerformed"/>

@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import utilitarios.ProfessorDAO;
 import utilitarios.Restricao;
@@ -20,6 +21,7 @@ public class Nova_restricao extends javax.swing.JFrame {
      * Creates new form Nova_restricao
      */
     public Nova_restricao() {
+        
         initComponents();
     }
 
@@ -50,8 +52,9 @@ public class Nova_restricao extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nova Restrição");
 
+        jbVoltar.setMnemonic('v');
         jbVoltar.setText("Voltar");
-        jbVoltar.setToolTipText("Volta para o menu");
+        jbVoltar.setToolTipText("Retorna ao menu principal");
         jbVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbVoltarActionPerformed(evt);
@@ -59,7 +62,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dia"));
-        jPanel1.setToolTipText("Dia da semana onde ocorre a restrição");
+        jPanel1.setToolTipText("Dia da restrição");
 
         buttonGroup1.add(rbSegunda);
         rbSegunda.setText("Segunda-feira");
@@ -107,7 +110,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Turno"));
-        jPanel2.setToolTipText("Turno do dia onde ocorre a restrição");
+        jPanel2.setToolTipText("Turno da restrição");
 
         buttonGroup2.add(rbMatutino);
         rbMatutino.setText("Matutino");
@@ -142,6 +145,7 @@ public class Nova_restricao extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jbSalvar.setMnemonic('s');
         jbSalvar.setText("Salvar Restrição");
         jbSalvar.setToolTipText("Salva a restrição");
         jbSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -284,6 +288,7 @@ public class Nova_restricao extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new Nova_restricao().setVisible(true);
             }
         });
