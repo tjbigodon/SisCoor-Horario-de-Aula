@@ -25,12 +25,13 @@ public class ProfessorDAO {
         try {
             PreparedStatement pstmt = con.prepareStatement(
                     "insert into professor " +
-                     "(nome,userName,email,senha,areaAtuacao) VALUES (?,?,?,?,?)");
+                     "(nome,userName,email,senha,areaAtuacao,status) VALUES (?,?,?,?,?,?)");
             pstmt.setString(1, prof.getNome());
             pstmt.setString(2, prof.getUsername());
             pstmt.setString(3, prof.getEmail());
             pstmt.setString(4, prof.getSenha());
             pstmt.setInt(5, prof.getAreaAtuacao());
+            pstmt.setString(6, "");
             pstmt.execute();
             pstmt.close();
             con.close();
