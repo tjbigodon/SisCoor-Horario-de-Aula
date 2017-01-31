@@ -53,6 +53,6 @@ public class AreaAtuacao {
     public void setCod(int cod) {
         this.cod = cod;
     }
-    
-    
+     
 }
+/* asjg*/
