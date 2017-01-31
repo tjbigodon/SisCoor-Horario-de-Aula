@@ -254,86 +254,95 @@ public class Editar_Restricao extends javax.swing.JFrame {
         
         linha=jTable1.getSelectedRow();
         
-        cod=(int) jTable1.getValueAt(linha, 0);
-        
-        if(rbSegunda.isSelected())
+        if(linha==-1)
         {
-            restricao.setDia("Segunda-feira");
-            dia=true;
+            JOptionPane.showMessageDialog(rootPane, "Selecione a restrição que deseja modificar.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         
-        if(rbTerca.isSelected())
+        else
         {
-            restricao.setDia("Terça-feira");
-            dia=true;
-        }
-        
-        if(rbQuarta.isSelected())
-        {
-            restricao.setDia("Quarta-feira");
-            dia=true;
-        }
-        
-        if(rbQuinta.isSelected())
-        {
-            restricao.setDia("Quinta-feira");
-            dia=true;
-        }
-        
-        if(rbSexta.isSelected())
-        {
-            restricao.setDia("Sexta-feira");
-            dia=true;
-        }
-        
-        if(rbMatutino.isSelected())
-        {
-            restricao.setTurno("Matutino");
-            turno=true;
-        }
-        
-        if(rbVespertino.isSelected())
-        {
-            restricao.setTurno("Vespertino");
-            turno=true;
-        }
-        
-        if(rbNoturno.isSelected())
-        {
-            restricao.setTurno("Noturno");
-            turno=true;
-        }
-        
-        restricao.setCodProf(professorDAO.buscar_Ativo());
-        
-        if(dia==false || turno==false)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Selecione o Dia e o Turno na Restrição que Deseja Modificar", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-        
-        if(dia==true && turno==true)
-        {
-            if((restriDAO.buscar_Repeticao(restricao.getDia(), restricao.getTurno(), restricao.getCodProf()))==true)
+            cod=(int) jTable1.getValueAt(linha, 0);
+
+            if(rbSegunda.isSelected())
             {
-                JOptionPane.showMessageDialog(rootPane, "Restrição ja Existente", "Warning", JOptionPane.WARNING_MESSAGE);
+                restricao.setDia("Segunda-feira");
+                dia=true;
             }
-            else
+
+            if(rbTerca.isSelected())
             {
-                confirm=JOptionPane.showInputDialog("Digite \"Sim\" Para Confirmar ");
+                restricao.setDia("Terça-feira");
+                dia=true;
+            }
 
-                if(confirm.equalsIgnoreCase("Sim"))
+            if(rbQuarta.isSelected())
+            {
+                restricao.setDia("Quarta-feira");
+                dia=true;
+            }
+
+            if(rbQuinta.isSelected())
+            {
+                restricao.setDia("Quinta-feira");
+                dia=true;
+            }
+
+            if(rbSexta.isSelected())
+            {
+                restricao.setDia("Sexta-feira");
+                dia=true;
+            }
+
+            if(rbMatutino.isSelected())
+            {
+                restricao.setTurno("Matutino");
+                turno=true;
+            }
+
+            if(rbVespertino.isSelected())
+            {
+                restricao.setTurno("Vespertino");
+                turno=true;
+            }
+
+            if(rbNoturno.isSelected())
+            {
+                restricao.setTurno("Noturno");
+                turno=true;
+            }
+          
+        
+            restricao.setCodProf(professorDAO.buscar_Ativo());
+
+            if(dia==false || turno==false)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Selecione o Dia e o Turno na restrição que deseja modificar.", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+            if(dia==true && turno==true)
+            {
+                if((restriDAO.buscar_Repeticao(restricao.getDia(), restricao.getTurno(), restricao.getCodProf()))==true)
                 {
-                    dia=false;
-                    turno=false;
+                    JOptionPane.showMessageDialog(rootPane, "Restrição ja existente.", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+                else
+                {
+                    confirm=JOptionPane.showInputDialog("Digite \"Sim\" Para Confirmar !");
 
-                    restriDAO.atualizar(restricao.getDia(), restricao.getTurno(), cod);
+                    if(confirm.equalsIgnoreCase("Sim"))
+                    {
+                        dia=false;
+                        turno=false;
 
-                    JOptionPane.showMessageDialog(rootPane, "Restrição Alterada com Sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        restriDAO.atualizar(restricao.getDia(), restricao.getTurno(), cod);
 
-                    ProfessorDAO professor = new ProfessorDAO();
-                    jTable1.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE codProf="+professor.buscar_Ativo()));
-                }      
-            }   
+                        JOptionPane.showMessageDialog(rootPane, "Restrição alterada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                        ProfessorDAO professor = new ProfessorDAO();
+                        jTable1.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE codProf="+professor.buscar_Ativo()));
+                    }      
+                }   
+            }       
         }
     }//GEN-LAST:event_btSalvarActionPerformed
 

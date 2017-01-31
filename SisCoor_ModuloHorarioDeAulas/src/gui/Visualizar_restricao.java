@@ -5,6 +5,7 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
 import utilitarios.Modelo_jTable;
 import utilitarios.ProfessorDAO;
 import utilitarios.RestricaoDAO;
@@ -115,9 +116,9 @@ public class Visualizar_restricao extends javax.swing.JFrame {
                     .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbTurno)
-                    .addComponent(btVoltar))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btVoltar)
+                    .addComponent(rbTurno))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -178,25 +179,34 @@ public class Visualizar_restricao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
-        if(rbCodigo.isSelected())
+        
+        if(jtfPesquisar.getText().equals(""))
         {
-            ProfessorDAO professor = new ProfessorDAO();
-            jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE cod="+Integer.parseInt(jtfPesquisar.getText())+" AND codProf="+professor.buscar_Ativo()));
-            jtfPesquisar.setText(null);
+            JOptionPane.showMessageDialog(rootPane, "Preecha os dados corretamente.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         
-        if(rbDia.isSelected())
+        else
         {
-            ProfessorDAO professor = new ProfessorDAO();
-            jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE dia=\""+jtfPesquisar.getText()+"\" AND codProf="+professor.buscar_Ativo()));
-            jtfPesquisar.setText(null);
-        }
-        
-        if(rbTurno.isSelected())
-        {
-            ProfessorDAO professor = new ProfessorDAO();
-            jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE turno=\""+jtfPesquisar.getText()+"\" AND codProf="+professor.buscar_Ativo()));
-            jtfPesquisar.setText(null);
+            if(rbCodigo.isSelected())
+            {
+                ProfessorDAO professor = new ProfessorDAO();
+                jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE cod="+Integer.parseInt(jtfPesquisar.getText())+" AND codProf="+professor.buscar_Ativo()));
+                jtfPesquisar.setText(null);
+            }
+
+            if(rbDia.isSelected())
+            {
+                ProfessorDAO professor = new ProfessorDAO();
+                jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE dia=\""+jtfPesquisar.getText()+"\" AND codProf="+professor.buscar_Ativo()));
+                jtfPesquisar.setText(null);
+            }
+
+            if(rbTurno.isSelected())
+            {
+                ProfessorDAO professor = new ProfessorDAO();
+                jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE turno=\""+jtfPesquisar.getText()+"\" AND codProf="+professor.buscar_Ativo()));
+                jtfPesquisar.setText(null);
+            }
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
 

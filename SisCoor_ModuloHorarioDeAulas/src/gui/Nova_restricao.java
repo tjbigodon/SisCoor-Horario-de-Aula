@@ -204,57 +204,70 @@ public class Nova_restricao extends javax.swing.JFrame {
         Restricao restricao = new Restricao();
         RestricaoDAO restricaoDAO = new RestricaoDAO();
         ProfessorDAO professorDAO = new ProfessorDAO();
+        boolean dia=false, turno=false;
         
         if(rbSegunda.isSelected())
         {
             restricao.setDia("Segunda-feira");
+            dia=true;
         }
         
         if(rbTerca.isSelected())
         {
             restricao.setDia("Terça-feira");
+            dia=true;
         }
         
         if(rbQuarta.isSelected())
         {
             restricao.setDia("Quarta-feira");
+            dia=true;
         }
         
         if(rbQuinta.isSelected())
         {
             restricao.setDia("Quinta-feira");
+            dia=true;
         }
         
         if(rbSexta.isSelected())
         {
             restricao.setDia("Sexta-feira");
+            dia=true;
         }
         
         if(rbMatutino.isSelected())
         {
             restricao.setTurno("Matutino");
+            turno=true;
         }
         
         if(rbVespertino.isSelected())
         {
             restricao.setTurno("Vespertino");
+            turno=true;
         }
         
         if(rbNoturno.isSelected())
         {
             restricao.setTurno("Noturno");
+            turno=true;
         }
         
         restricao.setCodProf(professorDAO.buscar_Ativo());
         
         if((restricaoDAO.buscar_Repeticao(restricao.getDia(), restricao.getTurno(), restricao.getCodProf()))==true)
         {
-            JOptionPane.showMessageDialog(rootPane, "Restrição ja Existente", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Restrição ja existente.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-        else
+        if(dia==true && turno==true)
         {
             restricaoDAO.inserir(restricao);
-            JOptionPane.showMessageDialog(rootPane, "Restrição Salva com Sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Restrição salva com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        }
+        if(dia==false || turno==false)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Preencha os dados corretamente.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 

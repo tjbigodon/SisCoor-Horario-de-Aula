@@ -139,18 +139,26 @@ public class Deletar_restricao extends javax.swing.JFrame {
         
         linha=jTable1.getSelectedRow();
         
-        cod=(int) jTable1.getValueAt(linha, 0);
-        
-        confirm=JOptionPane.showInputDialog("Digite \"Sim\" Para Confirmar ");
-        
-        if(confirm.equalsIgnoreCase("Sim"))
+        if(linha==-1)
         {
-            restriDAO.deletar(cod);
-            
-            JOptionPane.showMessageDialog(rootPane, "Restrição Excluida com Sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Selecione a restrição que deseja excluir.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
         
-            ProfessorDAO professor = new ProfessorDAO();
-            jTable1.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE codProf="+professor.buscar_Ativo()));
+        else
+        {
+            cod=(int) jTable1.getValueAt(linha, 0);
+        
+            confirm=JOptionPane.showInputDialog("Digite \"Sim\" Para Confirmar !");
+
+            if(confirm.equalsIgnoreCase("Sim"))
+            {
+                restriDAO.deletar(cod);
+
+                JOptionPane.showMessageDialog(rootPane, "Restrição excluida com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                ProfessorDAO professor = new ProfessorDAO();
+                jTable1.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE codProf="+professor.buscar_Ativo()));
+            }
         }
     }//GEN-LAST:event_btDeletarActionPerformed
 
