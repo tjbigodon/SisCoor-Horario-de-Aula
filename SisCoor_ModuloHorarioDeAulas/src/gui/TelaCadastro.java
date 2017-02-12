@@ -12,6 +12,8 @@ import utilitarios.AreaAtuacaoDAO;
 import utilitarios.Criptografia;
 import utilitarios.Professor;
 import utilitarios.ProfessorDAO;
+import utilitarios.Perguntas;
+import utilitarios.PerguntasDAO;
 
 /**
  * Classe responsável pela implementação da tela de cadastro.
@@ -56,6 +58,12 @@ public class TelaCadastro extends javax.swing.JFrame {
         pfSenhaRep = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         lbCadastroArea = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        comboPergunta = new javax.swing.JComboBox();
+        jLabel12 = new javax.swing.JLabel();
+        jTFPergunta = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jTFdataNasc = new javax.swing.JTextField();
 
         jLabel7.setText("Senha:");
 
@@ -120,52 +128,63 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         lbCadastroArea.setForeground(new java.awt.Color(0, 0, 250));
 
+        jLabel11.setText("Pergunta Secreta:");
+
+        comboPergunta.setToolTipText("Caso sua área não esteja listada aqui, crie uma selecionando \"Outro(a)\".");
+
+        jLabel12.setText("Resposta:");
+
+        jLabel13.setText("Data de nascimento:");
+
+        jTFdataNasc.setText("dd/mm/aaaa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(166, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(134, 134, 134))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbErro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel13))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfNomeCad)
                             .addComponent(tfEmailCad)
                             .addComponent(tfUsernameCad, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pfSenhaCad)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(btVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                        .addComponent(btCad)
-                        .addGap(50, 50, 50))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel10))
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboAreaAtuacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pfSenhaCad)
+                            .addComponent(comboPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pfSenhaRep)
-                            .addComponent(tfAreaAtuacao)))
+                            .addComponent(jTFPergunta)
+                            .addComponent(comboAreaAtuacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfAreaAtuacao)
+                            .addComponent(jTFdataNasc)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lbCadastroArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(btVoltar)
+                        .addGap(62, 62, 62)
+                        .addComponent(lbCadastroArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(35, 35, 35)
+                        .addComponent(btCad)))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,40 +198,57 @@ public class TelaCadastro extends javax.swing.JFrame {
                         .addComponent(jLabel3)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfNomeCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNomeCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfEmailCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFdataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfUsernameCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfEmailCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(pfSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfUsernameCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(pfSenhaRep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pfSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(comboAreaAtuacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(pfSenhaRep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboAreaAtuacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
                 .addComponent(tfAreaAtuacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btVoltar)
-                    .addComponent(btCad))
-                .addGap(19, 19, 19)
-                .addComponent(lbCadastroArea)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(lbCadastroArea)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btCad)
+                            .addComponent(btVoltar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(lbErro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9))
+                .addGap(1, 1, 1))
         );
 
         pack();
@@ -225,6 +261,11 @@ public class TelaCadastro extends javax.swing.JFrame {
     public void addItem(String nomeItem) {
         comboAreaAtuacao.addItem(nomeItem);
     }
+    
+    public void addItemP(String nomeItem)
+    {
+        comboPergunta.addItem(nomeItem);
+    }
 
     private void btCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadActionPerformed
         lbCadastroArea.setText("");
@@ -234,18 +275,23 @@ public class TelaCadastro extends javax.swing.JFrame {
         AreaAtuacao aa = new AreaAtuacao();
         ProfessorDAO pf = new ProfessorDAO();
         AreaAtuacaoDAO area = new AreaAtuacaoDAO();
+        PerguntasDAO perg = new PerguntasDAO();
         ArrayList<Professor> aProf = pf.listar();
         ArrayList<AreaAtuacao> aArea = area.listar();
-        int areaAtuacao;
+        ArrayList<Perguntas> aPerg = perg.listar();
+        
+        int areaAtuacao, codperg;
         boolean encontrou = false;
         boolean erroSenha = false;
         boolean erroEmail = false;
         boolean erroArea = false;
         boolean erroSenhaRep = false;
         boolean erroAreaRep = false;
+        boolean errodata_nasc = false;
+        boolean erroPerg = false;
         boolean deveInserir = true;
 
-        if (tfNomeCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || String.valueOf(pfSenhaCad.getPassword()).isEmpty() || String.valueOf(pfSenhaRep.getPassword()).isEmpty()) {
+        if (tfNomeCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || String.valueOf(pfSenhaCad.getPassword()).isEmpty() || String.valueOf(pfSenhaRep.getPassword()).isEmpty() || (jTFdataNasc.getText().isEmpty()) || jTFPergunta.getText().isEmpty()) {
             lbErro.setText("Preencha todos os campos!");
             pfSenhaCad.setText("");
             pfSenhaRep.setText("");
@@ -303,56 +349,85 @@ public class TelaCadastro extends javax.swing.JFrame {
                     lbErro.setText("");
                     erroEmail = false;
                 }
-
-                if (erroEmail == false) {
-                    if (comboAreaAtuacao.getSelectedItem().equals("Outro(a)") && tfAreaAtuacao.getText().isEmpty()) {
-                        lbErro.setText("Digite sua area de atuação!");
-                        pfSenhaCad.setText("");
-                        pfSenhaRep.setText("");
-                        erroArea = true;
-                    } else {
-                        lbErro.setText("");
-                        erroArea = false;
+                if(erroEmail==false)
+                {
+                    if(jTFdataNasc.getText().equals("dd/mm/aaaa"))
+                    {
+                        lbErro.setText("Digite uma data de nascimento valida!");
+                        errodata_nasc=true;
                     }
+                    
+                    else
+                    {
+                        lbErro.setText("");
+                        errodata_nasc = false;
+                    }
+                    
+                    if(errodata_nasc==false)
+                    {
+                        if(jTFPergunta.getText().equals(""))
+                        {
+                            lbErro.setText("Digite resposta valida!");
+                            erroPerg=true;
+                        }
 
-                    if (erroArea == false) {
-                        if (!String.valueOf(pfSenhaCad.getPassword()).equals(String.valueOf(pfSenhaRep.getPassword()))) {
-                            lbErro.setText("As senhas não conferem!");
-                            pfSenhaCad.setText("");
-                            pfSenhaRep.setText("");
-                            erroSenhaRep = true;
-                        } else {
+                        else
+                        {
                             lbErro.setText("");
-                            erroSenhaRep = false;
+                            erroPerg = false;
                         }
                         
-                        if(comboAreaAtuacao.getSelectedItem().equals("Outro(a)")) {
-                            for(int i=0; i < aArea.size(); i++){
-                                if(tfAreaAtuacao.getText().equals(aArea.get(i).getNomeArea())){
-                                    lbErro.setText("Área já cadastrada!");
-                                    comboAreaAtuacao.setSelectedItem(aArea.get(i).getNomeArea());
-                                    tfAreaAtuacao.setText("");
-                                    tfAreaAtuacao.setEditable(false);
-                                    erroAreaRep = true;
-                                    break;
+                            if (erroPerg== false) {
+                                if (comboAreaAtuacao.getSelectedItem().equals("Outro(a)") && tfAreaAtuacao.getText().isEmpty()) {
+                                    lbErro.setText("Digite sua area de atuação!");
+                                    pfSenhaCad.setText("");
+                                    pfSenhaRep.setText("");
+                                    erroArea = true;
+                                } else {
+                                    lbErro.setText("");
+                                    erroArea = false;
+                                }
+
+                                if (erroArea == false) {
+                                    if (!String.valueOf(pfSenhaCad.getPassword()).equals(String.valueOf(pfSenhaRep.getPassword()))) {
+                                        lbErro.setText("As senhas não conferem!");
+                                        pfSenhaCad.setText("");
+                                        pfSenhaRep.setText("");
+                                        erroSenhaRep = true;
+                                    } else {
+                                        lbErro.setText("");
+                                        erroSenhaRep = false;
+                                    }
+
+                                    if(comboAreaAtuacao.getSelectedItem().equals("Outro(a)")) {
+                                        for(int i=0; i < aArea.size(); i++){
+                                            if(tfAreaAtuacao.getText().equals(aArea.get(i).getNomeArea())){
+                                                lbErro.setText("Área já cadastrada!");
+                                                comboAreaAtuacao.setSelectedItem(aArea.get(i).getNomeArea());
+                                                tfAreaAtuacao.setText("");
+                                                tfAreaAtuacao.setEditable(false);
+                                                erroAreaRep = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if(erroAreaRep==false){
+                                            aa.setNomeArea(tfAreaAtuacao.getText());
+                                            area.inserir(aa);
+                                            addItem(aa.getNomeArea());
+                                            comboAreaAtuacao.setSelectedItem(aa.getNomeArea());
+                                            tfAreaAtuacao.setText("");
+                                            deveInserir = false;
+                                            btCadActionPerformed(evt);
+                                        }
+                                    }
                                 }
                             }
-                            
-                            if(erroAreaRep==false){
-                                aa.setNomeArea(tfAreaAtuacao.getText());
-                                area.inserir(aa);
-                                addItem(aa.getNomeArea());
-                                comboAreaAtuacao.setSelectedItem(aa.getNomeArea());
-                                tfAreaAtuacao.setText("");
-                                deveInserir = false;
-                                btCadActionPerformed(evt);
-                            }
-                        }
                     }
                 }
-        }
+            }
 
-        if (encontrou == false && erroArea == false && erroEmail == false && erroSenha == false && erroSenhaRep == false && erroAreaRep == false&&deveInserir == true) {
+        if (encontrou == false && erroArea == false && erroEmail == false && erroSenha == false && erroSenhaRep == false && erroAreaRep == false && errodata_nasc ==false && erroPerg==false && deveInserir == true) {
             String senhaC = String.valueOf(pfSenhaCad.getPassword());
             
             aArea = area.listar();
@@ -363,11 +438,22 @@ public class TelaCadastro extends javax.swing.JFrame {
                     break;
                 }
             }
+            
+            aPerg = perg.listar();
+            
+            for (int i = 0; i < aPerg.size(); i++) {
+                if (comboPergunta.getSelectedItem().equals(aPerg.get(i).getPergunta())) {
+                    prof.setCodPerg(aPerg.get(i).getCod());
+                    break;
+                }
+            }
 
             prof.setNome(tfNomeCad.getText());
             prof.setUsername(tfUsernameCad.getText());
             prof.setEmail(tfEmailCad.getText());
             prof.setSenha(Criptografia.criptografar(senhaC));
+            prof.setData_de_nascimento(jTFdataNasc.getText());
+            prof.setRespostaperg(Criptografia.criptografar(jTFPergunta.getText()));
             pf.inserir(prof);
             
             lbCadastroArea.setText("Cadastro realizado com sucesso!");
@@ -423,8 +509,12 @@ public static void main(String args[]) {
     private javax.swing.JButton btCad;
     private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox comboAreaAtuacao;
+    private javax.swing.JComboBox comboPergunta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -433,6 +523,8 @@ public static void main(String args[]) {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTFPergunta;
+    private javax.swing.JTextField jTFdataNasc;
     private javax.swing.JLabel lbCadastroArea;
     private javax.swing.JLabel lbErro;
     private javax.swing.JPasswordField pfSenhaCad;

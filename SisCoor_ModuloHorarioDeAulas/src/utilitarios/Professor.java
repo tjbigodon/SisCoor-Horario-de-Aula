@@ -5,17 +5,59 @@
  */
 package utilitarios;
 
+import java.util.Calendar;
+
 /**
  * Classe responsável pela criação e operações referentes a um professor.
  * @author Tarcísio
  */
 public class Professor {
+   
     private int cod;
     private String nome;
     private String username;
     private String senha;
     private String email;
     private int areaAtuacao;
+    private int codPerg;
+    private String Respostaperg;
+    private String data_de_nascimento;
+
+    public Professor(int cod, String nome, String username, String senha, String email, int areaAtuacao, int codPerg, String Respostaperg, String data_de_nascimento) {
+        this.cod = cod;
+        this.nome = nome;
+        this.username = username;
+        this.senha = senha;
+        this.email = email;
+        this.areaAtuacao = areaAtuacao;
+        this.codPerg = codPerg;
+        this.Respostaperg = Respostaperg;
+        this.data_de_nascimento = data_de_nascimento;
+    }
+
+    public String getData_de_nascimento() {
+        return data_de_nascimento;
+    }
+
+    public void setData_de_nascimento(String data_de_nascimento) {
+        this.data_de_nascimento = data_de_nascimento;
+    }
+
+    public int getCodPerg() {
+        return codPerg;
+    }
+
+    public void setCodPerg(int codPerg) {
+        this.codPerg = codPerg;
+    }
+
+    public String getRespostaperg() {
+        return Respostaperg;
+    }
+
+    public void setRespostaperg(String Respostaperg) {
+        this.Respostaperg = Respostaperg;
+    }
     
     /**
      * Método construtor com atributos.

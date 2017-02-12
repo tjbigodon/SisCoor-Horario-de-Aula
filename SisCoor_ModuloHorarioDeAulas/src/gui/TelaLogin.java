@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 import utilitarios.AreaAtuacao;
 import utilitarios.AreaAtuacaoDAO;
 import utilitarios.Criptografia;
+import utilitarios.Perguntas;
+import utilitarios.PerguntasDAO;
 import utilitarios.Professor;
 import utilitarios.ProfessorDAO;
 
@@ -46,6 +48,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbErroLogin = new javax.swing.JLabel();
+        jBEsqueci = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnSobre = new javax.swing.JMenuItem();
@@ -111,6 +114,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
         lbErroLogin.setForeground(new java.awt.Color(204, 0, 0));
 
+        jBEsqueci.setText("Esqueci minha senha");
+        jBEsqueci.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEsqueciActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Sistema");
 
         mnSobre.setText("Sobre");
@@ -141,10 +151,6 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btCadastro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btEntrar))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfUsuario))
@@ -153,7 +159,13 @@ public class TelaLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbErroLogin)
-                            .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btCadastro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBEsqueci)
+                        .addGap(18, 18, 18)
+                        .addComponent(btEntrar)))
                 .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -180,13 +192,14 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lbErroLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btEntrar)
                     .addComponent(btCadastro)
-                    .addComponent(btEntrar))
-                .addGap(20, 20, 20))
+                    .addComponent(jBEsqueci))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -246,15 +259,23 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
         AreaAtuacaoDAO area = new AreaAtuacaoDAO();
+        PerguntasDAO perg = new PerguntasDAO();
         ArrayList<AreaAtuacao> aArea = area.listar();
+        ArrayList<Perguntas> aPerg = perg.listar();
         
+        EsqueciSenha es = new EsqueciSenha();
         TelaCadastro tc = new TelaCadastro();
         tc.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        tc.setLocationRelativeTo(this);
+        tc.setLocationRelativeTo(null);
         tc.setVisible(true);
         
         for(int i=0;i<aArea.size();i++){
             tc.addItem(aArea.get(i).getNomeArea());
+        }
+        
+        for(int i=0;i<aPerg.size();i++){
+            tc.addItemP(aPerg.get(i).getPergunta());
+            es.addItem(aPerg.get(i).getPergunta());
         }
     }//GEN-LAST:event_btCadastroActionPerformed
 
@@ -269,6 +290,13 @@ public class TelaLogin extends javax.swing.JFrame {
     private void mnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_mnSairActionPerformed
+
+    private void jBEsqueciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEsqueciActionPerformed
+        EsqueciSenha es = new EsqueciSenha();
+        es.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        es.setLocationRelativeTo(null);
+        es.setVisible(true);
+    }//GEN-LAST:event_jBEsqueciActionPerformed
 
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -305,6 +333,7 @@ public static void main(String args[]) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastro;
     private javax.swing.JButton btEntrar;
+    private javax.swing.JButton jBEsqueci;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

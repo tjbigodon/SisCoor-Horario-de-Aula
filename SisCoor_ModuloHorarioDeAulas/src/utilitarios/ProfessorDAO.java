@@ -25,13 +25,16 @@ public class ProfessorDAO {
         try {
             PreparedStatement pstmt = con.prepareStatement(
                     "insert into professor " +
-                     "(nome,userName,email,senha,areaAtuacao,status) VALUES (?,?,?,?,?,?)");
+                     "(nome,userName,email,senha,areaAtuacao,status,data_de_nascimento, resposta_secreta, cod_perg) VALUES (?,?,?,?,?,?,?,?,?)");
             pstmt.setString(1, prof.getNome());
             pstmt.setString(2, prof.getUsername());
             pstmt.setString(3, prof.getEmail());
             pstmt.setString(4, prof.getSenha());
             pstmt.setInt(5, prof.getAreaAtuacao());
             pstmt.setString(6, "");
+            pstmt.setString(7, prof.getData_de_nascimento());
+            pstmt.setString(8, prof.getRespostaperg());
+            pstmt.setInt(9, prof.getCodPerg());
             pstmt.execute();
             pstmt.close();
             con.close();
@@ -123,6 +126,45 @@ public class ProfessorDAO {
             }
             rs.close();
             stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Não foi possível consultar tabela..."+e);   
+        }
+        return cod;
+    }
+    
+    public void EsqueciSenha(Professor prof){
+        Connection con = ConexaoBD.getConexao();
+        try {
+            PreparedStatement pstmt = con.prepareStatement(
+                    "update professor set " +
+                     "senha=? where cod=?");
+            pstmt.setString(1, prof.getSenha());
+            pstmt.setInt(2, prof.getCod());
+            pstmt.execute();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public int buscar(Professor professor)
+    {
+        Connection con = ConexaoBD.getConexao();
+        int cod=0;
+        try {
+            PreparedStatement pstmt = con.prepareStatement("");
+            ResultSet rs = pstmt.executeQuery("SELECT cod FROM professor WHERE where userName=? AND data_de_nascimento=?");
+            while(rs.next())
+            {
+                pstmt.setString(1, professor.getUsername());
+                pstmt.setString(2, professor.getData_de_nascimento());
+                professor.setCod(rs.getInt("cod"));
+                cod=professor.getCod();
+            }
+            rs.close();
+            pstmt.close();
             con.close();
         } catch (Exception e) {
             System.out.println("Não foi possível consultar tabela..."+e);   
