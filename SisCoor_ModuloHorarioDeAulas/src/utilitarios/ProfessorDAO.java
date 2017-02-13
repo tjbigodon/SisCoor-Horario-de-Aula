@@ -152,23 +152,75 @@ public class ProfessorDAO {
     public int buscar(Professor professor)
     {
         Connection con = ConexaoBD.getConexao();
+        String userName, data_de_nascimento;
         int cod=0;
         try {
-            PreparedStatement pstmt = con.prepareStatement("");
-            ResultSet rs = pstmt.executeQuery("SELECT cod FROM professor WHERE where userName=? AND data_de_nascimento=?");
+            Statement stmt =  con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT cod, userName, data_de_nascimento FROM professor");
             while(rs.next())
             {
-                pstmt.setString(1, professor.getUsername());
-                pstmt.setString(2, professor.getData_de_nascimento());
-                professor.setCod(rs.getInt("cod"));
-                cod=professor.getCod();
+                userName=(rs.getString("userName"));
+                data_de_nascimento=(rs.getString("data_de_nascimento"));
+                
+                if(professor.getUsername().equals(userName) && professor.getData_de_nascimento().equals(data_de_nascimento))
+                {
+                    cod=rs.getInt("cod");
+                }
             }
             rs.close();
-            pstmt.close();
+            stmt.close();
             con.close();
         } catch (Exception e) {
             System.out.println("Não foi possível consultar tabela..."+e);   
         }
         return cod;
+    }
+    
+    public int buscarCodPerg(Professor professor)
+    {
+        Connection con = ConexaoBD.getConexao();
+        int cod=0;
+   
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT cod_perg, cod FROM professor");
+            while(rs.next())
+            {
+                if(rs.getInt("cod")==professor.getCod())
+                {
+                    cod=rs.getInt("cod_perg");
+                }
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Não foi possível consultar tabela..."+e);   
+        }
+        return cod;
+    }
+    
+    public boolean buscarPerg(String pergunta, int cod)
+    {
+        Connection con = ConexaoBD.getConexao();
+        boolean erro=false;
+        String perg;
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT resposta_secreta, cod FROM professor");
+            while(rs.next())
+            {      
+                if(pergunta.equals(rs.getString("resposta_secreta")) && cod==rs.getInt("cod"))
+                {
+                    erro=true;
+                }
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Não foi possível consultar tabela..."+e);   
+        }
+        return erro;
     }
 }

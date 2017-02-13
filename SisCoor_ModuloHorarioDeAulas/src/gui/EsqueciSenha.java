@@ -5,10 +5,12 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import utilitarios.AreaAtuacao;
 import utilitarios.AreaAtuacaoDAO;
+import utilitarios.Criptografia;
 import utilitarios.Perguntas;
 import utilitarios.PerguntasDAO;
 import utilitarios.Professor;
@@ -25,6 +27,8 @@ public class EsqueciSenha extends javax.swing.JFrame {
      */
     public EsqueciSenha() {
         initComponents();
+        
+
     }
     public void addItem(String nomeItem) {
         comboPergunta.addItem(nomeItem);
@@ -50,13 +54,15 @@ public class EsqueciSenha extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTFresposta = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTnovaSenha = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTComfSenha = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLerro = new javax.swing.JLabel();
+        jTnovaSenha = new javax.swing.JPasswordField();
+        jTComfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Esqueci minha senha");
 
         jLabel1.setText("Usuário:");
 
@@ -69,7 +75,9 @@ public class EsqueciSenha extends javax.swing.JFrame {
 
         jLabel3.setText("Pergunta:");
 
-        jLabel5.setText("Data de nascimento:");
+        jLabel5.setText("Data de Nascimento:");
+
+        jTFdataNasc.setText("dd/mm/aaaa");
 
         jLabel6.setText("Resposta:");
 
@@ -91,6 +99,9 @@ public class EsqueciSenha extends javax.swing.JFrame {
             }
         });
 
+        jLerro.setBackground(new java.awt.Color(255, 255, 255));
+        jLerro.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,26 +119,31 @@ public class EsqueciSenha extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(jLerro)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFdataNasc)
-                            .addComponent(jTUser)
-                            .addComponent(comboPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTFresposta)
-                            .addComponent(jTnovaSenha)
-                            .addComponent(jTComfSenha))))
-                .addGap(29, 29, 29))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFdataNasc)
+                                    .addComponent(jTUser)
+                                    .addComponent(comboPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTFresposta)
+                                    .addComponent(jTnovaSenha)
+                                    .addComponent(jTComfSenha))))
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +176,9 @@ public class EsqueciSenha extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTComfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jLerro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -176,16 +194,82 @@ public class EsqueciSenha extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
+        jLerro.setText("");
+        jLerro.setForeground(Color.red);
+        
         Professor professor = new Professor();
         ProfessorDAO professorDAO = new ProfessorDAO();
         PerguntasDAO perguntasDAO = new PerguntasDAO();
         
-        int codPergunta=0;
+        int codPergunta=0, codProf=0, codPerguntaProf=0;
+        String pergunta;
+        boolean erro;
         
-        professor.setUsername(jTUser.getText());
+        professor.setUsername(jTUser.getText()); 
         professor.setData_de_nascimento(jTFdataNasc.getText());
-        codPergunta=perguntasDAO.buscar(String.valueOf(comboPergunta.getSelectedItem()));
+        codProf=professorDAO.buscar(professor);
         
+        if(codProf>0)
+        {
+            professor.setCod(codProf);
+            codPergunta=perguntasDAO.buscar(String.valueOf(comboPergunta.getSelectedItem()));
+            codPerguntaProf=professorDAO.buscarCodPerg(professor);
+            
+            if(codPergunta==codPerguntaProf)
+            {
+                pergunta=(Criptografia.criptografar(jTFresposta.getText()));
+                
+                erro=professorDAO.buscarPerg(pergunta, codProf);
+                
+                if(erro==true)
+                {
+
+                    if(String.valueOf(jTnovaSenha.getPassword()).equals(String.valueOf(jTComfSenha.getPassword())))
+                    {
+                        professor.setSenha(Criptografia.criptografar(String.valueOf(jTnovaSenha.getPassword())));
+                        professorDAO.EsqueciSenha(professor);
+                        jLerro.setForeground(Color.BLUE);
+                        jLerro.setText("Alteração feita com sucesso!");
+                        
+                        jTUser.setText("");
+                        jTFdataNasc.setText("");
+                        jTFresposta.setText("");
+                        jTnovaSenha.setText("");
+                        jTComfSenha.setText("");
+                    }
+                    
+                    else if(String.valueOf(jTnovaSenha.getPassword()).equals("") && String.valueOf(jTComfSenha.getPassword()).equals(""))
+                    {
+                        jLerro.setText("Por favor, Digite a senha corretamente");
+                        jTnovaSenha.setText("");
+                        jTComfSenha.setText("");
+                    }
+
+                    else
+                    {
+                        jLerro.setText("Por favor, Digite a senha corretamente");
+                        jTnovaSenha.setText("");
+                        jTComfSenha.setText("");
+                    }
+                }
+                else
+                {
+                    jLerro.setText("Resposta incorreta!");
+                    jTFresposta.setText("");
+                }
+            }
+            else
+            {
+                jLerro.setText("Pergunta incorreta!");
+            }
+        }
+        
+        else
+        {
+            jLerro.setText("Usuario ou data de nascimento não encontrado!");
+            jTUser.setText("");
+            jTFdataNasc.setText("");
+        }  
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -218,7 +302,7 @@ public class EsqueciSenha extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-       
+                
                 new EsqueciSenha().setVisible(true);
             }
         });
@@ -236,10 +320,11 @@ public class EsqueciSenha extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTComfSenha;
+    private javax.swing.JLabel jLerro;
+    private javax.swing.JPasswordField jTComfSenha;
     private javax.swing.JTextField jTFdataNasc;
     private javax.swing.JTextField jTFresposta;
     private javax.swing.JTextField jTUser;
-    private javax.swing.JTextField jTnovaSenha;
+    private javax.swing.JPasswordField jTnovaSenha;
     // End of variables declaration//GEN-END:variables
 }

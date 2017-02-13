@@ -43,15 +43,17 @@ public class PerguntasDAO
         Connection con = ConexaoBD.getConexao();
         int cod=0;
         try {
-            PreparedStatement pstmt = con.prepareStatement("");
-            ResultSet rs = pstmt.executeQuery("SELECT codPergunta FROM perguntas WHERE where pergunta=?");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT codPergunta, pergunta FROM perguntas");
             while(rs.next())
             {
-                pstmt.setString(1, pergunta);
-                cod=rs.getInt("cod");
+                if(pergunta.equals(rs.getString("pergunta")))
+                {
+                    cod=rs.getInt("codPergunta");
+                }
             }
             rs.close();
-            pstmt.close();
+            stmt.close();
             con.close();
         } catch (Exception e) {
             System.out.println("Não foi possível consultar tabela..."+e);   
