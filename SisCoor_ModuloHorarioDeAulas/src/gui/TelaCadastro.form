@@ -234,10 +234,7 @@
     <Component class="javax.swing.JComboBox" name="comboAreaAtuacao">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value=""/>
-            <StringItem index="1" value="Outro(a)"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Caso sua &#xe1;rea n&#xe3;o esteja listada aqui, crie uma selecionando &quot;Outro(a)&quot;."/>
       </Properties>

@@ -95,7 +95,6 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jLabel8.setText("Área de Atuação:");
 
-        comboAreaAtuacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Outro(a)" }));
         comboAreaAtuacao.setToolTipText("Caso sua área não esteja listada aqui, crie uma selecionando \"Outro(a)\".");
         comboAreaAtuacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -332,7 +331,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
 
         for (int i = 0; i < aProf.size(); i++) {
-            if (tfEmailCad.getText().equals(aProf.get(i).getEmail()) && !tfEmailCad.getText().equals(aProf.get(i).getEmail())) {
+            if (tfUsernameCad.getText().equals(aProf.get(i).getUsername()) && !tfEmailCad.getText().equals(aProf.get(i).getEmail())) {
                 lbErro.setText("Usuário já cadastrado! Tente novamente");
                 tfUsernameCad.setText("");
                 encontrou = true;

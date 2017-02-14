@@ -40,7 +40,7 @@ public class AreaAtuacaoDAO {
      * Método que retorna um ArrayList contendo todas as informações sobre todas as áreas de atuação no DB.
      * @return todos os registros de áreas de atuação no DB.
      */
-    public ArrayList<AreaAtuacao> listar(){
+    public static ArrayList<AreaAtuacao> listar(){
         Connection con = ConexaoBD.getConexao();
         ArrayList<AreaAtuacao> res = new ArrayList<AreaAtuacao>();
         try {

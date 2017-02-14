@@ -237,6 +237,11 @@ public class TelaLogin extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Bem vindo!", "Boas vindas", HEIGHT);
                     encontrou = true;
                     profBD.ativar_Professor(tfUsuario.getText());
+                    TelaPrincipal tp = new TelaPrincipal();
+                    tp.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                    tp.setLocationRelativeTo(this);
+                    tp.setVisible(true);
+                    this.dispose();
                 }
 
                 if((i+1)==profs.size()&&encontrou==false){
@@ -271,9 +276,10 @@ public class TelaLogin extends javax.swing.JFrame {
         
         TelaCadastro tc = new TelaCadastro();
         tc.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        tc.setLocationRelativeTo(null);
+        tc.setLocationRelativeTo(this);
         tc.setVisible(true);
-        
+            
+            tc.addItem("Outro(a)");
         for(int i=0;i<aArea.size();i++){
             tc.addItem(aArea.get(i).getNomeArea());
         }

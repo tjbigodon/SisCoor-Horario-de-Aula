@@ -44,6 +44,33 @@ public class ProfessorDAO {
     }
     
     /**
+     * Método que edita um professor existente no DB
+     */
+    public void editar(Professor prof){
+        Connection con = ConexaoBD.getConexao();
+        try {
+            PreparedStatement pstmt = con.prepareStatement(
+                    "update professor " +
+                     "set nome = ?,userName = ?,email = ?,senha = ?,areaAtuacao = ?,status = ?,data_de_nascimento = ?, resposta_secreta = ?, cod_perg = ? where professor.cod = ?");
+            pstmt.setString(1, prof.getNome());
+            pstmt.setString(2, prof.getUsername());
+            pstmt.setString(3, prof.getEmail());
+            pstmt.setString(4, prof.getSenha());
+            pstmt.setInt(5, prof.getAreaAtuacao());
+            pstmt.setString(6, "");
+            pstmt.setString(7, prof.getData_de_nascimento());
+            pstmt.setString(8, prof.getRespostaperg());
+            pstmt.setInt(9, prof.getCodPerg());
+            pstmt.setInt(10, prof.getCod());
+            pstmt.execute();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
      * Metodo que marca o professor logado como ativo
      */
     public void ativar_Professor(String nome){
@@ -83,7 +110,7 @@ public class ProfessorDAO {
      * Método que retorna um ArrayList contendo todas as informações sobre todos os professores no DB.
      * @return todos os registros de professores no DB.
      */
-    public ArrayList<Professor> listar(){
+    public static ArrayList<Professor> listar(){
         Connection con = ConexaoBD.getConexao();
         ArrayList<Professor> res = new ArrayList<Professor>();
         try {
@@ -111,7 +138,7 @@ public class ProfessorDAO {
      * Metodo responsavel por retornar o codigo do professor que esta logado no momento.
      * @return Retorna o codigo do professor ativo no momento
      */
-    public int buscar_Ativo()
+    public static int buscar_Ativo()
     {
         Connection con = ConexaoBD.getConexao();
         int cod=0;
@@ -131,6 +158,36 @@ public class ProfessorDAO {
             System.out.println("Não foi possível consultar tabela..."+e);   
         }
         return cod;
+    }
+    
+    public static Professor buscarProfAtivo()
+    {
+        Professor prof = new Professor();
+        Connection con = ConexaoBD.getConexao();
+        int cod=0;
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM professor WHERE status='ATIVO'");
+            
+            while(rs.next())
+            {         
+                prof.setCod(rs.getInt("cod"));
+                prof.setNome(rs.getString("nome"));
+                prof.setUsername(rs.getString("userName"));
+                prof.setEmail(rs.getString("email"));
+                prof.setSenha(rs.getString("senha"));
+                prof.setData_de_nascimento(rs.getString("data_de_nascimento"));
+                prof.setAreaAtuacao(rs.getInt("areaAtuacao"));
+                prof.setCodPerg(rs.getInt("cod_perg"));
+                prof.setRespostaperg(rs.getString("resposta_secreta"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Não foi possível consultar tabela..."+e);   
+        }
+        return prof;
     }
     
     public void EsqueciSenha(Professor prof){
