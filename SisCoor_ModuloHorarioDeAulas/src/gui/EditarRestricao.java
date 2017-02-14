@@ -15,12 +15,12 @@ import utilitarios.RestricaoDAO;
  *
  * @author Diego
  */
-public class Editar_Restricao extends javax.swing.JFrame {
+public class EditarRestricao extends javax.swing.JFrame {
 
     /**
      * Creates new form Editar_Restricao
      */
-    public Editar_Restricao() {
+    public EditarRestricao() {
         initComponents();
         
         ProfessorDAO prof = new ProfessorDAO();
@@ -363,20 +363,20 @@ public class Editar_Restricao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Editar_Restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Editar_Restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Editar_Restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Editar_Restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Editar_Restricao().setVisible(true);
+                new EditarRestricao().setVisible(true);
             }
         });
     }

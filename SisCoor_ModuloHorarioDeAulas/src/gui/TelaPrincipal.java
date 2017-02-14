@@ -35,18 +35,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuMinhaConta = new javax.swing.JMenu();
         menuInfoPessoal = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        menuRestricao = new javax.swing.JMenu();
         menuAddRestricao = new javax.swing.JMenuItem();
         menuEditarRestricao = new javax.swing.JMenuItem();
         menuExcluirRestricao = new javax.swing.JMenuItem();
         menuVisualizarRestricao = new javax.swing.JMenuItem();
+        menuLogoff = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Minha Conta");
+        menuMinhaConta.setText("Minha Conta");
 
         menuInfoPessoal.setText("Editar Informações Pessoais");
         menuInfoPessoal.addActionListener(new java.awt.event.ActionListener() {
@@ -54,9 +55,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuInfoPessoalActionPerformed(evt);
             }
         });
-        jMenu1.add(menuInfoPessoal);
+        menuMinhaConta.add(menuInfoPessoal);
 
-        jMenu3.setText("Restrições");
+        menuRestricao.setText("Restrições");
 
         menuAddRestricao.setText("Adicionar Restrição");
         menuAddRestricao.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +65,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuAddRestricaoActionPerformed(evt);
             }
         });
-        jMenu3.add(menuAddRestricao);
+        menuRestricao.add(menuAddRestricao);
 
         menuEditarRestricao.setText("Editar Restrição");
         menuEditarRestricao.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +73,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuEditarRestricaoActionPerformed(evt);
             }
         });
-        jMenu3.add(menuEditarRestricao);
+        menuRestricao.add(menuEditarRestricao);
 
         menuExcluirRestricao.setText("Excluir Restrição");
         menuExcluirRestricao.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +81,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuExcluirRestricaoActionPerformed(evt);
             }
         });
-        jMenu3.add(menuExcluirRestricao);
+        menuRestricao.add(menuExcluirRestricao);
 
         menuVisualizarRestricao.setText("Visualizar Restrições");
         menuVisualizarRestricao.addActionListener(new java.awt.event.ActionListener() {
@@ -88,11 +89,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuVisualizarRestricaoActionPerformed(evt);
             }
         });
-        jMenu3.add(menuVisualizarRestricao);
+        menuRestricao.add(menuVisualizarRestricao);
 
-        jMenu1.add(jMenu3);
+        menuMinhaConta.add(menuRestricao);
 
-        jMenuBar1.add(jMenu1);
+        menuLogoff.setText("Desconectar");
+        menuLogoff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLogoffActionPerformed(evt);
+            }
+        });
+        menuMinhaConta.add(menuLogoff);
+
+        jMenuBar1.add(menuMinhaConta);
 
         jMenu2.setText("Ajuda");
         jMenuBar1.add(jMenu2);
@@ -130,27 +139,48 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuInfoPessoalActionPerformed
 
     private void menuAddRestricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAddRestricaoActionPerformed
-        Nova_restricao nr = new Nova_restricao();
+        NovaRestricao nr = new NovaRestricao();
         nr.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         nr.setLocationRelativeTo(this);
         nr.setVisible(true);
     }//GEN-LAST:event_menuAddRestricaoActionPerformed
 
     private void menuEditarRestricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarRestricaoActionPerformed
-        // TODO add your handling code here:
+        EditarRestricao er = new EditarRestricao();
+        
+        er.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        er.setLocationRelativeTo(this);
+        er.setVisible(true);
     }//GEN-LAST:event_menuEditarRestricaoActionPerformed
 
     private void menuExcluirRestricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExcluirRestricaoActionPerformed
-        // TODO add your handling code here:
+        DeletarRestricao dr = new DeletarRestricao();
+        
+        dr.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        dr.setLocationRelativeTo(this);
+        dr.setVisible(true);
     }//GEN-LAST:event_menuExcluirRestricaoActionPerformed
 
     private void menuVisualizarRestricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVisualizarRestricaoActionPerformed
-        Visualizar_restricao vr = new Visualizar_restricao();
+        VisualizarRestricao vr = new VisualizarRestricao();
         
         vr.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         vr.setLocationRelativeTo(this);
         vr.setVisible(true);
     }//GEN-LAST:event_menuVisualizarRestricaoActionPerformed
+
+    private void menuLogoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoffActionPerformed
+        ProfessorDAO profD = new ProfessorDAO();
+        
+        profD.desativar_Professor();
+        
+        TelaLogin tl = new TelaLogin();
+        tl.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        tl.setLocationRelativeTo(this);
+        tl.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_menuLogoffActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,14 +218,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem menuAddRestricao;
     private javax.swing.JMenuItem menuEditarRestricao;
     private javax.swing.JMenuItem menuExcluirRestricao;
     private javax.swing.JMenuItem menuInfoPessoal;
+    private javax.swing.JMenuItem menuLogoff;
+    private javax.swing.JMenu menuMinhaConta;
+    private javax.swing.JMenu menuRestricao;
     private javax.swing.JMenuItem menuVisualizarRestricao;
     // End of variables declaration//GEN-END:variables
 }

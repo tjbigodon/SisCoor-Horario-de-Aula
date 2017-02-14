@@ -15,12 +15,12 @@ import utilitarios.RestricaoDAO;
  *
  * @author Diego
  */
-public class Deletar_restricao extends javax.swing.JFrame {
+public class DeletarRestricao extends javax.swing.JFrame {
 
     /**
      * Creates new form Deletar_restricao
      */
-    public Deletar_restricao() {
+    public DeletarRestricao() {
         initComponents();
         
         ProfessorDAO prof = new ProfessorDAO();
@@ -183,20 +183,20 @@ public class Deletar_restricao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Deletar_restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeletarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Deletar_restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeletarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Deletar_restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeletarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Deletar_restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeletarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Deletar_restricao().setVisible(true);
+                new DeletarRestricao().setVisible(true);
             }
         });
     }

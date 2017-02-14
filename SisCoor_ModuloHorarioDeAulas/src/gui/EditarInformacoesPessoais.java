@@ -217,7 +217,7 @@ public class EditarInformacoesPessoais extends javax.swing.JFrame {
                     lbErro.setText("Digite um nome válido!");
                     nomeValido = false;
                 }else{
-                    if(tfEmailCad.getText().isEmpty()){
+                    if(tfEmailCad.getText().isEmpty()||(tfEmailCad.getText().indexOf('@') == -1 || tfEmailCad.getText().indexOf('.') == -1)){
                         lbErro.setText("Digite um e-mail válido!");
                         emailValido = false;
                     }else{

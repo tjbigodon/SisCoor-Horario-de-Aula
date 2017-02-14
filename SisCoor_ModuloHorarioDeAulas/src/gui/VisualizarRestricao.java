@@ -14,12 +14,12 @@ import utilitarios.RestricaoDAO;
  *
  * @author Diego
  */
-public class Visualizar_restricao extends javax.swing.JFrame {
+public class VisualizarRestricao extends javax.swing.JFrame {
 
     /**
      * Creates new form Visualizar_restricao
      */
-    public Visualizar_restricao() {
+    public VisualizarRestricao() {
         initComponents();
         ProfessorDAO prof = new ProfessorDAO();
         jTable2.setModel(new Modelo_jTable("SELECT cod, dia, turno FROM restricao WHERE codProf="+prof.buscar_Ativo()));
@@ -231,20 +231,20 @@ public class Visualizar_restricao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Visualizar_restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Visualizar_restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Visualizar_restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Visualizar_restricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarRestricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Visualizar_restricao().setVisible(true);
+                new VisualizarRestricao().setVisible(true);
                 
             }
         });
