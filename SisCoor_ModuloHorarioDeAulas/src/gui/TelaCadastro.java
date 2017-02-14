@@ -7,13 +7,15 @@ package gui;
 
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import utilitarios.AreaAtuacao;
 import utilitarios.AreaAtuacaoDAO;
 import utilitarios.Criptografia;
-import utilitarios.Professor;
-import utilitarios.ProfessorDAO;
 import utilitarios.Perguntas;
 import utilitarios.PerguntasDAO;
+import utilitarios.Professor;
+import utilitarios.ProfessorDAO;
 
 /**
  * Classe responsável pela implementação da tela de cadastro.
@@ -63,7 +65,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jTFPergunta = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTFdataNasc = new javax.swing.JTextField();
+        comboMes = new javax.swing.JComboBox();
+        comboDia = new javax.swing.JComboBox();
+        comboAno = new javax.swing.JComboBox();
 
         jLabel7.setText("Senha:");
 
@@ -137,18 +141,26 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jLabel13.setText("Data de nascimento:");
 
-        jTFdataNasc.setText("dd/mm/aaaa");
+        comboMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mês", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
+        comboMes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboMesItemStateChanged(evt);
+            }
+        });
+
+        comboDia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dia" }));
+
+        comboAno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ano" }));
+        comboAno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboAnoItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(166, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(134, 134, 134))
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +190,13 @@ public class TelaCadastro extends javax.swing.JFrame {
                             .addComponent(jTFPergunta)
                             .addComponent(comboAreaAtuacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfAreaAtuacao)
-                            .addComponent(jTFdataNasc)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(comboAno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboMes, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 41, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btVoltar)
                         .addGap(62, 62, 62)
@@ -186,6 +204,12 @@ public class TelaCadastro extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(btCad)))
                 .addGap(29, 29, 29))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(151, 151, 151))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,8 +227,10 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFdataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(comboMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfEmailCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,7 +292,15 @@ public class TelaCadastro extends javax.swing.JFrame {
     {
         comboPergunta.addItem(nomeItem);
     }
-
+    
+    public void addItemAno(int ano){
+        comboAno.addItem(ano);
+    }
+    
+    public void addItemDia(int dia){
+        comboDia.addItem(dia);
+    }
+    
     private void btCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadActionPerformed
         lbCadastroArea.setText("");
         lbErro.setText("");
@@ -291,7 +325,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         boolean erroPerg = false;
         boolean deveInserir = true;
 
-        if (tfNomeCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || String.valueOf(pfSenhaCad.getPassword()).isEmpty() || String.valueOf(pfSenhaRep.getPassword()).isEmpty() || (jTFdataNasc.getText().isEmpty()) || jTFPergunta.getText().isEmpty()) {
+        if (tfNomeCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || String.valueOf(pfSenhaCad.getPassword()).isEmpty() || String.valueOf(pfSenhaRep.getPassword()).isEmpty() || jTFPergunta.getText().isEmpty()) {
             lbErro.setText("Preencha todos os campos!");
             pfSenhaCad.setText("");
             pfSenhaRep.setText("");
@@ -351,7 +385,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                 }
                 if(erroEmail==false)
                 {
-                    if(jTFdataNasc.getText().equals("dd/mm/aaaa"))
+                    if(comboDia.getSelectedIndex()==0||comboMes.getSelectedIndex()==0||comboAno.getSelectedIndex()==0)
                     {
                         lbErro.setText("Digite uma data de nascimento valida!");
                         errodata_nasc=true;
@@ -452,7 +486,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             prof.setUsername(tfUsernameCad.getText());
             prof.setEmail(tfEmailCad.getText());
             prof.setSenha(Criptografia.criptografar(senhaC));
-            prof.setData_de_nascimento(jTFdataNasc.getText());
+            prof.setData_de_nascimento(comboDia.getSelectedItem().toString()+"/"+comboMes.getSelectedItem().toString()+"/"+comboAno.getSelectedItem().toString());
             prof.setRespostaperg(Criptografia.criptografar(jTFPergunta.getText()));
             pf.inserir(prof);
             
@@ -472,6 +506,55 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void comboAnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboAnoItemStateChanged
+        comboDia.removeAllItems();
+        comboDia.addItem("Dia");
+        comboDia.setSelectedIndex(0);
+        if(comboAno.getSelectedIndex()==0&&(Integer.parseInt(comboAno.getSelectedItem().toString())%400==0)||(Integer.parseInt(comboAno.getSelectedItem().toString())%4==0&&Integer.parseInt(comboAno.getSelectedItem().toString())%100!=0)){
+            for(int i = 1;i<=29;i++)
+                    this.addItemDia(i);
+        }
+        else{
+            for(int i = 1;i<=28;i++)
+                    this.addItemDia(i);
+        }
+    }//GEN-LAST:event_comboAnoItemStateChanged
+
+    private void comboMesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboMesItemStateChanged
+        comboDia.removeAllItems();
+        comboDia.addItem("Dia");
+            
+        if(comboMes.getSelectedIndex()==2){
+            
+            if(comboAno.getSelectedIndex()!=0&&Integer.parseInt(comboAno.getSelectedItem().toString())%400==0){
+                for(int i = 1;i<=29;i++)
+                    this.addItemDia(i);
+            } else if((comboAno.getSelectedIndex()!=0&&Integer.parseInt(comboAno.getSelectedItem().toString())%4==0)&&(comboAno.getSelectedIndex()!=0&&Integer.parseInt(comboAno.getSelectedItem().toString())%100!=0)){
+                for(int i = 1;i<=29;i++)
+                    this.addItemDia(i);
+            } else{
+                for(int i = 1;i<=28;i++)
+                    this.addItemDia(i);
+            }
+        }
+        else if(comboMes.getSelectedIndex()%2==0&&comboMes.getSelectedIndex()<8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=30;i++)
+                this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2==0&&comboMes.getSelectedIndex()>8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=31;i++)
+                this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2!=0&&comboMes.getSelectedIndex()<8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=31;i++)
+                this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2!=0&&comboMes.getSelectedIndex()>8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=30;i++)
+                this.addItemDia(i);
+        }
+    }//GEN-LAST:event_comboMesItemStateChanged
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -508,7 +591,10 @@ public static void main(String args[]) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCad;
     private javax.swing.JButton btVoltar;
+    private javax.swing.JComboBox comboAno;
     private javax.swing.JComboBox comboAreaAtuacao;
+    private javax.swing.JComboBox comboDia;
+    private javax.swing.JComboBox comboMes;
     private javax.swing.JComboBox comboPergunta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -524,7 +610,6 @@ public static void main(String args[]) {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTFPergunta;
-    private javax.swing.JTextField jTFdataNasc;
     private javax.swing.JLabel lbCadastroArea;
     private javax.swing.JLabel lbErro;
     private javax.swing.JPasswordField pfSenhaCad;

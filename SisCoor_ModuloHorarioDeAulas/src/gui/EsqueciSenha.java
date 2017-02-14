@@ -50,7 +50,6 @@ public class EsqueciSenha extends javax.swing.JFrame {
         comboPergunta = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTFdataNasc = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTFresposta = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -60,31 +59,37 @@ public class EsqueciSenha extends javax.swing.JFrame {
         jLerro = new javax.swing.JLabel();
         jTnovaSenha = new javax.swing.JPasswordField();
         jTComfSenha = new javax.swing.JPasswordField();
+        comboMes = new javax.swing.JComboBox();
+        comboDia = new javax.swing.JComboBox();
+        comboAno = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Esqueci minha senha");
 
         jLabel1.setText("Usuário:");
 
+        jTUser.setToolTipText("Digite o nome de usuário cadastrado!");
+
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setText("Esqueci minha senha");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/lock-icon.png"))); // NOI18N
 
-        comboPergunta.setToolTipText("Caso sua área não esteja listada aqui, crie uma selecionando \"Outro(a)\".");
+        comboPergunta.setToolTipText("Selecione a pergunta que você respondeu no cadastro!");
 
         jLabel3.setText("Pergunta:");
 
         jLabel5.setText("Data de Nascimento:");
 
-        jTFdataNasc.setText("dd/mm/aaaa");
-
         jLabel6.setText("Resposta:");
 
-        jLabel7.setText("Senha:");
+        jTFresposta.setToolTipText("Digite a mesma resposta do momento do cadastro!");
 
-        jLabel8.setText("Comfirmar Senha:");
+        jLabel7.setText("Nova Senha:");
 
+        jLabel8.setText("Confirmar Senha:");
+
+        jButton1.setMnemonic('v');
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +97,7 @@ public class EsqueciSenha extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setMnemonic('s');
         jButton2.setText("Salvar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +107,27 @@ public class EsqueciSenha extends javax.swing.JFrame {
 
         jLerro.setBackground(new java.awt.Color(255, 255, 255));
         jLerro.setForeground(new java.awt.Color(255, 0, 0));
+
+        jTnovaSenha.setToolTipText("Essa será sua nova senha.");
+
+        comboMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mês", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
+        comboMes.setToolTipText("Digite o seu mês de nascimento!");
+        comboMes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboMesItemStateChanged(evt);
+            }
+        });
+
+        comboDia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dia" }));
+        comboDia.setToolTipText("Digite seu dia de nascimento!");
+
+        comboAno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ano" }));
+        comboAno.setToolTipText("Digite seu ano de nascimento!");
+        comboAno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboAnoItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,14 +162,23 @@ public class EsqueciSenha extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8))
-                                .addGap(16, 16, 16)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFdataNasc)
-                                    .addComponent(jTUser)
-                                    .addComponent(comboPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTFresposta)
-                                    .addComponent(jTnovaSenha)
-                                    .addComponent(jTComfSenha))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTUser)
+                                            .addComponent(comboPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTFresposta)
+                                            .addComponent(jTnovaSenha)
+                                            .addComponent(jTComfSenha)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(comboAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboMes, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
@@ -157,9 +193,12 @@ public class EsqueciSenha extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTFdataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(comboMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,8 +231,15 @@ public class EsqueciSenha extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void addItemAno(int ano){
+        comboAno.addItem(ano);
+    }
+    
+    public void addItemDia(int dia){
+        comboDia.addItem(dia);
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
         jLerro.setText("");
         jLerro.setForeground(Color.red);
         
@@ -205,8 +251,9 @@ public class EsqueciSenha extends javax.swing.JFrame {
         String pergunta;
         boolean erro;
         
-        professor.setUsername(jTUser.getText()); 
-        professor.setData_de_nascimento(jTFdataNasc.getText());
+        professor.setUsername(jTUser.getText());
+        professor.setData_de_nascimento(comboDia.getSelectedItem().toString()+"/"+comboMes.getSelectedItem().toString()+"/"+comboAno.getSelectedItem().toString());
+        
         codProf=professorDAO.buscar(professor);
         
         if(codProf>0)
@@ -232,7 +279,9 @@ public class EsqueciSenha extends javax.swing.JFrame {
                         jLerro.setText("Alteração feita com sucesso!");
                         
                         jTUser.setText("");
-                        jTFdataNasc.setText("");
+                        comboDia.setSelectedIndex(0);
+                        comboMes.setSelectedIndex(0);
+                        comboAno.setSelectedIndex(0);
                         jTFresposta.setText("");
                         jTnovaSenha.setText("");
                         jTComfSenha.setText("");
@@ -268,9 +317,61 @@ public class EsqueciSenha extends javax.swing.JFrame {
         {
             jLerro.setText("Usuario ou data de nascimento não encontrado!");
             jTUser.setText("");
-            jTFdataNasc.setText("");
+            comboDia.setSelectedIndex(0);
+            comboAno.setSelectedIndex(0);
+            comboMes.setSelectedIndex(0);
         }  
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void comboMesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboMesItemStateChanged
+        comboDia.removeAllItems();
+        comboDia.addItem("Dia");
+
+        if(comboMes.getSelectedIndex()==2){
+
+            if(comboAno.getSelectedIndex()!=0&&Integer.parseInt(comboAno.getSelectedItem().toString())%400==0){
+                for(int i = 1;i<=29;i++)
+                this.addItemDia(i);
+            } else if((comboAno.getSelectedIndex()!=0&&Integer.parseInt(comboAno.getSelectedItem().toString())%4==0)&&(comboAno.getSelectedIndex()!=0&&Integer.parseInt(comboAno.getSelectedItem().toString())%100!=0)){
+                for(int i = 1;i<=29;i++)
+                this.addItemDia(i);
+            } else{
+                for(int i = 1;i<=28;i++)
+                this.addItemDia(i);
+            }
+        }
+        else if(comboMes.getSelectedIndex()%2==0&&comboMes.getSelectedIndex()<8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=30;i++)
+            this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2==0&&comboMes.getSelectedIndex()>8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=31;i++)
+            this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2!=0&&comboMes.getSelectedIndex()<8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=31;i++)
+            this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2!=0&&comboMes.getSelectedIndex()>8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=30;i++)
+            this.addItemDia(i);
+        }
+    }//GEN-LAST:event_comboMesItemStateChanged
+
+    private void comboAnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboAnoItemStateChanged
+        comboDia.removeAllItems();
+        comboDia.addItem("Dia");
+        comboDia.setSelectedIndex(0);
+        if(comboAno.getSelectedIndex()!=0){
+            if((Integer.parseInt(comboAno.getSelectedItem().toString())%400==0)||(Integer.parseInt(comboAno.getSelectedItem().toString())%4==0&&Integer.parseInt(comboAno.getSelectedItem().toString())%100!=0)){
+                for(int i = 1;i<=29;i++)
+                    this.addItemDia(i);
+            } else{
+                for(int i = 1;i<=28;i++)
+                    this.addItemDia(i);
+            }
+        }
+    }//GEN-LAST:event_comboAnoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -309,6 +410,9 @@ public class EsqueciSenha extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox comboAno;
+    private javax.swing.JComboBox comboDia;
+    private javax.swing.JComboBox comboMes;
     private javax.swing.JComboBox comboPergunta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -322,7 +426,6 @@ public class EsqueciSenha extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLerro;
     private javax.swing.JPasswordField jTComfSenha;
-    private javax.swing.JTextField jTFdataNasc;
     private javax.swing.JTextField jTFresposta;
     private javax.swing.JTextField jTUser;
     private javax.swing.JPasswordField jTnovaSenha;

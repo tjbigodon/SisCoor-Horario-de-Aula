@@ -202,7 +202,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBEsqueci">
       <Properties>
+        <Property name="mnemonic" type="int" value="115"/>
         <Property name="text" type="java.lang.String" value="Esqueci minha senha"/>
+        <Property name="toolTipText" type="java.lang.String" value="Recupere sua senha aqui."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEsqueciActionPerformed"/>

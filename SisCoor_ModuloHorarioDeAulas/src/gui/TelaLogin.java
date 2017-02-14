@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import utilitarios.AreaAtuacao;
 import utilitarios.AreaAtuacaoDAO;
@@ -116,7 +118,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
         lbErroLogin.setForeground(new java.awt.Color(204, 0, 0));
 
+        jBEsqueci.setMnemonic('s');
         jBEsqueci.setText("Esqueci minha senha");
+        jBEsqueci.setToolTipText("Recupere sua senha aqui.");
         jBEsqueci.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEsqueciActionPerformed(evt);
@@ -277,6 +281,15 @@ public class TelaLogin extends javax.swing.JFrame {
         for(int i=0;i<aPerg.size();i++){
             tc.addItemP(aPerg.get(i).getPergunta());
         }
+        
+        Calendar cal = GregorianCalendar.getInstance();
+        
+        for(int i = 1940;i<=cal.get(Calendar.YEAR);i++){
+            tc.addItemAno(i);
+            if(i == Calendar.YEAR){
+                break;
+            }
+        }
     }//GEN-LAST:event_btCadastroActionPerformed
 
     private void pfSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pfSenhaFocusGained
@@ -304,6 +317,14 @@ public class TelaLogin extends javax.swing.JFrame {
         
         for(int i=0;i<aPerg.size();i++){
             es.addItem(aPerg.get(i).getPergunta());
+        }
+        Calendar cal = GregorianCalendar.getInstance();
+        
+        for(int i = 1940;i<=cal.get(Calendar.YEAR);i++){
+            es.addItemAno(i);
+            if(i == Calendar.YEAR){
+                break;
+            }
         }
     }//GEN-LAST:event_jBEsqueciActionPerformed
 
