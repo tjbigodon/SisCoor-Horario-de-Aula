@@ -325,7 +325,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         boolean erroPerg = false;
         boolean deveInserir = true;
 
-        if (tfNomeCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || String.valueOf(pfSenhaCad.getPassword()).isEmpty() || String.valueOf(pfSenhaRep.getPassword()).isEmpty() || jTFPergunta.getText().isEmpty()) {
+        if (tfNomeCad.getText().isEmpty() || tfEmailCad.getText().isEmpty() || comboAno.getSelectedIndex()==0 || comboMes.getSelectedIndex()==0 || comboDia.getSelectedIndex()==0 || String.valueOf(pfSenhaCad.getPassword()).isEmpty() || String.valueOf(pfSenhaRep.getPassword()).isEmpty() || jTFPergunta.getText().isEmpty() || comboAreaAtuacao.getSelectedIndex()==0 || (comboAreaAtuacao.getSelectedItem().toString().equals("Outro(a)"))) {
             lbErro.setText("Preencha todos os campos!");
             pfSenhaCad.setText("");
             pfSenhaRep.setText("");
@@ -511,13 +511,31 @@ public class TelaCadastro extends javax.swing.JFrame {
         comboDia.removeAllItems();
         comboDia.addItem("Dia");
         comboDia.setSelectedIndex(0);
-        if(comboAno.getSelectedIndex()==0&&(Integer.parseInt(comboAno.getSelectedItem().toString())%400==0)||(Integer.parseInt(comboAno.getSelectedItem().toString())%4==0&&Integer.parseInt(comboAno.getSelectedItem().toString())%100!=0)){
-            for(int i = 1;i<=29;i++)
-                    this.addItemDia(i);
+        if(comboMes.getSelectedIndex()==2){
+            if(comboAno.getSelectedIndex()==0&&(Integer.parseInt(comboAno.getSelectedItem().toString())%400==0)||(Integer.parseInt(comboAno.getSelectedItem().toString())%4==0&&Integer.parseInt(comboAno.getSelectedItem().toString())%100!=0)){
+                for(int i = 1;i<=29;i++)
+                        this.addItemDia(i);
+            }
+            else{
+                for(int i = 1;i<=28;i++)
+                        this.addItemDia(i);
+            }
         }
-        else{
-            for(int i = 1;i<=28;i++)
-                    this.addItemDia(i);
+        else if(comboMes.getSelectedIndex()%2==0&&comboMes.getSelectedIndex()<8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=30;i++)
+                this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2==0&&comboMes.getSelectedIndex()>8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=31;i++)
+                this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2!=0&&comboMes.getSelectedIndex()<8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=31;i++)
+                this.addItemDia(i);
+        }
+        else if(comboMes.getSelectedIndex()%2!=0&&comboMes.getSelectedIndex()>8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=30;i++)
+                this.addItemDia(i);
         }
     }//GEN-LAST:event_comboAnoItemStateChanged
 

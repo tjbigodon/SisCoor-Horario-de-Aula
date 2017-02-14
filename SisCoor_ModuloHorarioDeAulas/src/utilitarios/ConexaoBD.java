@@ -18,7 +18,7 @@ public class ConexaoBD {
     private static Connection conectar(){
         try {
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/siscoor?zeroDateTimeBehavior=convertToNull",
-                    "root", "");
+                    "root", "root");
         } catch (SQLException e) {
             System.out.println("Erro na conexão com o banco...");
             e.printStackTrace();

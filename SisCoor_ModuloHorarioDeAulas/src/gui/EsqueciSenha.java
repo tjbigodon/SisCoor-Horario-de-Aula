@@ -256,71 +256,76 @@ public class EsqueciSenha extends javax.swing.JFrame {
         
         codProf=professorDAO.buscar(professor);
         
-        if(codProf>0)
-        {
-            professor.setCod(codProf);
-            codPergunta=perguntasDAO.buscar(String.valueOf(comboPergunta.getSelectedItem()));
-            codPerguntaProf=professorDAO.buscarCodPerg(professor);
-            
-            if(codPergunta==codPerguntaProf)
+        if(jTUser.getText().isEmpty() || comboAno.getSelectedIndex()==0 || comboMes.getSelectedIndex()==0 || comboDia.getSelectedIndex()==0 || jTFresposta.getText().isEmpty() || jTnovaSenha.getPassword().toString().isEmpty() || jTComfSenha.getPassword().toString().isEmpty()){
+            jLerro.setText("Preencha todos os campos!");
+        }
+        else{
+            if(codProf>0)
             {
-                pergunta=(Criptografia.criptografar(jTFresposta.getText()));
-                
-                erro=professorDAO.buscarPerg(pergunta, codProf);
-                
-                if(erro==true)
+                professor.setCod(codProf);
+                codPergunta=perguntasDAO.buscar(String.valueOf(comboPergunta.getSelectedItem()));
+                codPerguntaProf=professorDAO.buscarCodPerg(professor);
+
+                if(codPergunta==codPerguntaProf)
                 {
+                    pergunta=(Criptografia.criptografar(jTFresposta.getText()));
 
-                    if(String.valueOf(jTnovaSenha.getPassword()).equals(String.valueOf(jTComfSenha.getPassword())))
-                    {
-                        professor.setSenha(Criptografia.criptografar(String.valueOf(jTnovaSenha.getPassword())));
-                        professorDAO.EsqueciSenha(professor);
-                        jLerro.setForeground(Color.BLUE);
-                        jLerro.setText("Alteração feita com sucesso!");
-                        
-                        jTUser.setText("");
-                        comboDia.setSelectedIndex(0);
-                        comboMes.setSelectedIndex(0);
-                        comboAno.setSelectedIndex(0);
-                        jTFresposta.setText("");
-                        jTnovaSenha.setText("");
-                        jTComfSenha.setText("");
-                    }
-                    
-                    else if(String.valueOf(jTnovaSenha.getPassword()).equals("") && String.valueOf(jTComfSenha.getPassword()).equals(""))
-                    {
-                        jLerro.setText("Por favor, Digite a senha corretamente");
-                        jTnovaSenha.setText("");
-                        jTComfSenha.setText("");
-                    }
+                    erro=professorDAO.buscarPerg(pergunta, codProf);
 
+                    if(erro==true)
+                    {
+
+                        if(String.valueOf(jTnovaSenha.getPassword()).equals(String.valueOf(jTComfSenha.getPassword())))
+                        {
+                            professor.setSenha(Criptografia.criptografar(String.valueOf(jTnovaSenha.getPassword())));
+                            professorDAO.EsqueciSenha(professor);
+                            jLerro.setForeground(Color.BLUE);
+                            jLerro.setText("Alteração feita com sucesso!");
+
+                            jTUser.setText("");
+                            comboDia.setSelectedIndex(0);
+                            comboMes.setSelectedIndex(0);
+                            comboAno.setSelectedIndex(0);
+                            jTFresposta.setText("");
+                            jTnovaSenha.setText("");
+                            jTComfSenha.setText("");
+                        }
+
+                        else if(String.valueOf(jTnovaSenha.getPassword()).equals("") && String.valueOf(jTComfSenha.getPassword()).equals(""))
+                        {
+                            jLerro.setText("Por favor, Digite a senha corretamente");
+                            jTnovaSenha.setText("");
+                            jTComfSenha.setText("");
+                        }
+
+                        else
+                        {
+                            jLerro.setText("Por favor, Digite a senha corretamente");
+                            jTnovaSenha.setText("");
+                            jTComfSenha.setText("");
+                        }
+                    }
                     else
                     {
-                        jLerro.setText("Por favor, Digite a senha corretamente");
-                        jTnovaSenha.setText("");
-                        jTComfSenha.setText("");
+                        jLerro.setText("Resposta incorreta!");
+                        jTFresposta.setText("");
                     }
                 }
                 else
                 {
-                    jLerro.setText("Resposta incorreta!");
-                    jTFresposta.setText("");
+                    jLerro.setText("Pergunta incorreta!");
                 }
             }
+
             else
             {
-                jLerro.setText("Pergunta incorreta!");
+                jLerro.setText("Usuario ou data de nascimento não encontrado!");
+                jTUser.setText("");
+                comboDia.setSelectedIndex(0);
+                comboAno.setSelectedIndex(0);
+                comboMes.setSelectedIndex(0);
             }
         }
-        
-        else
-        {
-            jLerro.setText("Usuario ou data de nascimento não encontrado!");
-            jTUser.setText("");
-            comboDia.setSelectedIndex(0);
-            comboAno.setSelectedIndex(0);
-            comboMes.setSelectedIndex(0);
-        }  
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void comboMesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboMesItemStateChanged
@@ -363,11 +368,29 @@ public class EsqueciSenha extends javax.swing.JFrame {
         comboDia.addItem("Dia");
         comboDia.setSelectedIndex(0);
         if(comboAno.getSelectedIndex()!=0){
-            if((Integer.parseInt(comboAno.getSelectedItem().toString())%400==0)||(Integer.parseInt(comboAno.getSelectedItem().toString())%4==0&&Integer.parseInt(comboAno.getSelectedItem().toString())%100!=0)){
-                for(int i = 1;i<=29;i++)
+            if(comboMes.getSelectedIndex()==2){
+                if((Integer.parseInt(comboAno.getSelectedItem().toString())%400==0)||(Integer.parseInt(comboAno.getSelectedItem().toString())%4==0&&Integer.parseInt(comboAno.getSelectedItem().toString())%100!=0)){
+                    for(int i = 1;i<=29;i++)
+                        this.addItemDia(i);
+                } else{
+                    for(int i = 1;i<=28;i++)
+                        this.addItemDia(i);
+                }
+            }
+            else if(comboMes.getSelectedIndex()%2==0&&comboMes.getSelectedIndex()<8&&comboMes.getSelectedIndex()!=0){
+            for(int i = 1;i<=30;i++)
+                this.addItemDia(i);
+            }
+            else if(comboMes.getSelectedIndex()%2==0&&comboMes.getSelectedIndex()>8&&comboMes.getSelectedIndex()!=0){
+                for(int i = 1;i<=31;i++)
                     this.addItemDia(i);
-            } else{
-                for(int i = 1;i<=28;i++)
+            }
+            else if(comboMes.getSelectedIndex()%2!=0&&comboMes.getSelectedIndex()<8&&comboMes.getSelectedIndex()!=0){
+                for(int i = 1;i<=31;i++)
+                    this.addItemDia(i);
+            }
+            else if(comboMes.getSelectedIndex()%2!=0&&comboMes.getSelectedIndex()>8&&comboMes.getSelectedIndex()!=0){
+                for(int i = 1;i<=30;i++)
                     this.addItemDia(i);
             }
         }
