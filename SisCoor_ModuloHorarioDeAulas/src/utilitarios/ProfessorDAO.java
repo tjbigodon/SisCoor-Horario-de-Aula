@@ -51,17 +51,16 @@ public class ProfessorDAO {
         try {
             PreparedStatement pstmt = con.prepareStatement(
                     "update professor " +
-                     "set nome = ?,userName = ?,email = ?,senha = ?,areaAtuacao = ?,status = ?,data_de_nascimento = ?, resposta_secreta = ?, cod_perg = ? where professor.cod = ?");
+                     "set nome = ?,userName = ?,email = ?,senha = ?,areaAtuacao = ?,data_de_nascimento = ?, resposta_secreta = ?, cod_perg = ? where professor.cod = ?");
             pstmt.setString(1, prof.getNome());
             pstmt.setString(2, prof.getUsername());
             pstmt.setString(3, prof.getEmail());
             pstmt.setString(4, prof.getSenha());
             pstmt.setInt(5, prof.getAreaAtuacao());
-            pstmt.setString(6, "");
-            pstmt.setString(7, prof.getData_de_nascimento());
-            pstmt.setString(8, prof.getRespostaperg());
-            pstmt.setInt(9, prof.getCodPerg());
-            pstmt.setInt(10, prof.getCod());
+            pstmt.setString(6, prof.getData_de_nascimento());
+            pstmt.setString(7, prof.getRespostaperg());
+            pstmt.setInt(8, prof.getCodPerg());
+            pstmt.setInt(9, prof.getCod());
             pstmt.execute();
             pstmt.close();
             con.close();

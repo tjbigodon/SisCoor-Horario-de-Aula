@@ -6,8 +6,11 @@
 package gui;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import utilitarios.AreaAtuacao;
 import utilitarios.AreaAtuacaoDAO;
+import utilitarios.Curso;
+import utilitarios.CursoDAO;
 import utilitarios.Professor;
 import utilitarios.ProfessorDAO;
 
@@ -18,6 +21,7 @@ import utilitarios.ProfessorDAO;
 public class TelaPrincipal extends javax.swing.JFrame {
     Professor prof = ProfessorDAO.buscarProfAtivo();
     
+    CursoDAO cursoD = new CursoDAO();
     /**
      * Creates new form TelaPrincipal
      */
@@ -34,6 +38,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        comboCursos = new javax.swing.JComboBox();
+        btAdicionarCurso = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btPreferencia = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuMinhaConta = new javax.swing.JMenu();
         menuInfoPessoal = new javax.swing.JMenuItem();
@@ -43,9 +55,99 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuExcluirRestricao = new javax.swing.JMenuItem();
         menuVisualizarRestricao = new javax.swing.JMenuItem();
         menuLogoff = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursos disponíveis"));
+
+        jLabel1.setText("Selecione um curso:");
+
+        comboCursos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha..." }));
+
+        btAdicionarCurso.setText("Adicionar Curso");
+        btAdicionarCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAdicionarCursoActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Gerenciar Curso");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        btPreferencia.setText("Editar Preferências do Curso");
+        btPreferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPreferenciaActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Excluir Curso");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Visualizar Horário de Aulas");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboCursos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btPreferencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btAdicionarCurso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(comboCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAdicionarCurso)
+                    .addComponent(jButton5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btPreferencia)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         menuMinhaConta.setText("Minha Conta");
 
@@ -103,25 +205,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuMinhaConta);
 
-        jMenu2.setText("Ajuda");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void addItem(String nomeCurso){
+        comboCursos.addItem(nomeCurso);
+    }
     
     
     private void menuInfoPessoalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInfoPessoalActionPerformed
@@ -147,7 +255,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void menuEditarRestricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarRestricaoActionPerformed
         EditarRestricao er = new EditarRestricao();
-        
         er.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         er.setLocationRelativeTo(this);
         er.setVisible(true);
@@ -181,6 +288,54 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_menuLogoffActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btAdicionarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarCursoActionPerformed
+        AdicionarCurso ac = new AdicionarCurso();
+        ac.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        ac.setLocationRelativeTo(this);
+        ac.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btAdicionarCursoActionPerformed
+
+    private void btPreferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPreferenciaActionPerformed
+        if(cursoD.buscarCurso(String.valueOf(comboCursos.getSelectedItem())).getProfCoord()==prof.getCod()){
+            EditarPrefCurso ac = new EditarPrefCurso();
+            ac.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            ac.setLocationRelativeTo(this);
+            
+            ac.passarCurso(String.valueOf(comboCursos.getSelectedItem()));
+            
+            ac.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this,"Permissão negada!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btPreferenciaActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowLostFocus
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        ArrayList<Curso> aCurso = CursoDAO.listar();
+        comboCursos.removeAllItems();
+        comboCursos.addItem("Escolha...");
+        
+        for(int i = 0; i<aCurso.size();i++){
+            comboCursos.addItem(aCurso.get(i).getNome());
+        }
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -218,8 +373,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JButton btAdicionarCurso;
+    private javax.swing.JButton btPreferencia;
+    private javax.swing.JComboBox comboCursos;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuAddRestricao;
     private javax.swing.JMenuItem menuEditarRestricao;
     private javax.swing.JMenuItem menuExcluirRestricao;

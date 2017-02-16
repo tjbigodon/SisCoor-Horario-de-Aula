@@ -35,8 +35,6 @@ public class EditarInformacoesPessoais extends javax.swing.JFrame {
     public EditarInformacoesPessoais(Professor prof) {
         initComponents();
         
-        
-        
         this.prof = prof;
         tfNomeCad.setText(this.prof.getNome());
         tfEmailCad.setText(this.prof.getEmail());

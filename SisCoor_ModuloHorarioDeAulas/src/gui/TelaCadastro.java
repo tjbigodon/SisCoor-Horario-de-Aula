@@ -503,6 +503,10 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_comboAreaAtuacaoActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        TelaLogin tl = new TelaLogin();
+        tl.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        tl.setLocationRelativeTo(this);
+        tl.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
 

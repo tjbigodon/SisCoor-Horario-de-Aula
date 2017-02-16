@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import utilitarios.AreaAtuacao;
 import utilitarios.AreaAtuacaoDAO;
 import utilitarios.Criptografia;
+import utilitarios.Curso;
+import utilitarios.CursoDAO;
 import utilitarios.Perguntas;
 import utilitarios.PerguntasDAO;
 import utilitarios.Professor;
@@ -230,17 +232,20 @@ public class TelaLogin extends javax.swing.JFrame {
             ArrayList<Professor> profs = new ArrayList<Professor>();
             ProfessorDAO profBD = new ProfessorDAO();
             
-            profs = profBD.listar();
+            profs = ProfessorDAO.listar();
 
             for(int i = 0; i<profs.size();i++){
                 if(tfUsuario.getText().equals(profs.get(i).getUsername())&&Criptografia.criptografar(String.valueOf(pfSenha.getPassword())).equals(profs.get(i).getSenha())){
+                    
                     JOptionPane.showMessageDialog(this, "Bem vindo!", "Boas vindas", HEIGHT);
                     encontrou = true;
                     profBD.ativar_Professor(tfUsuario.getText());
+                    
                     TelaPrincipal tp = new TelaPrincipal();
                     tp.setDefaultCloseOperation(EXIT_ON_CLOSE);
                     tp.setLocationRelativeTo(this);
                     tp.setVisible(true);
+                    
                     this.dispose();
                 }
 
@@ -296,6 +301,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 break;
             }
         }
+        
+        this.dispose();
     }//GEN-LAST:event_btCadastroActionPerformed
 
     private void pfSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pfSenhaFocusGained
@@ -332,6 +339,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 break;
             }
         }
+        
+        this.dispose();
     }//GEN-LAST:event_jBEsqueciActionPerformed
 
 public static void main(String args[]) {
